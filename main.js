@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+
 {/* end */ }
 // addEventListener('resize', removeStyle)
 
