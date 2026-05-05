@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,213 +38,216 @@
 </head>
 
 <body>
-         <header class="main-header">
-  <nav class="main-nav">
+    <header class="main-header">
+        <nav class="main-nav">
 
-    <!-- LOGO -->
-    <div class="brand-logo">
-      <a href="index.html">
-        <img src="./images/logo.png">
-      </a>
-    </div>
+            <!-- LOGO -->
+            <div class="brand-logo">
+                <a href="index.html">
+                    <img src="./images/logo.png">
+                </a>
+            </div>
 
-    <!-- MENU -->
-    <div class="menu-wrapper">
+            <!-- MENU -->
+            <div class="menu-wrapper">
 
-      <!-- ON CAMPUS -->
-      <div class="menu-item">
-        <div class="menu-link">
-          <i class="fa-solid fa-building-columns"></i>
-          On-Campus Courses <span class="icon-arrow"></span>
+                <!-- ON CAMPUS -->
+                <div class="menu-item">
+                    <div class="menu-link">
+                        <i class="fa-solid fa-building-columns"></i>
+                        On-Campus Courses <span class="icon-arrow"></span>
+                    </div>
+
+                    <div class="mega-box">
+                        <div class="mega-grid">
+
+                            <!-- COL 1 -->
+                            <div class="mega-col">
+                                <h4>Design & Multimedia Courses</h4>
+                                <a href="foundation-graphic.html">Graphic Designing</a>
+                                <a href="web-designing.html">Web Designing</a>
+                                <a href="ui&ux.html">UI & UX Design</a>
+                                <a href="animation.html">2D/3D Animation</a>
+                                <a href="motion-graphics.html">Motion Graphics</a>
+                                <a href="graphic-and-web-designing.html">Graphics & Web Designing</a>
+                                <a href="digital-content-creator.html">Digital Content Creator</a>
+                                <a href="autocad.html">Auto CAD</a>
+                            </div>
+
+                            <!-- COL 2 -->
+                            <div class="mega-col">
+                                <h4>CMS & Web Technologies Courses</h4>
+                                <a href="web-development.html">Web Development</a>
+                                <a href="fullstack-web-development.html">Full Stack Development</a>
+                                <a href="mern-stack.html">MERN Stack</a>
+                                <a href="mean-stack.html">MEAN Stack</a>
+                                <a href="php-training.html">PHP Training</a>
+                                <a href="wordpress.html">WordPress</a>
+
+                                <h4>Digital Marketing Courses</h4>
+                                <a href="digital-marketing.html">Digital Marketing</a>
+                                <a href="social-media-marketing.html">Social Media Marketing</a>
+                                <a href="seo-course.html">SEO Course</a>
+                            </div>
+
+                            <!-- COL 3 -->
+                            <div class="mega-col">
+                                <h4>Professional Training Courses</h4>
+                                <a href="business-analytics.html">Data Science & Business Analytics</a>
+                                <a href="machine-learning.html">Data Science & Machine Learning</a>
+                                <a href="data-analytics.html">Data Analytics</a>
+                                <a href="cyber-security.html">Complete Cyber Security Course</a>
+                                <a href="ethical-hacking.html">Ethical Hacking</a>
+                                <a href="software-engineering.html">Software Engineering With Python</a>
+
+                                <h4>Additional Courses</h4>
+                                <a href="system-design.html">System Design & Operating Systems</a>
+                                <a href="data-structures.html">Algorithm & Data Structures In Python</a>
+                                <a href="devops-course.html">DevOps Course</a>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ONLINE -->
+                <div class="menu-item">
+                    <div class="menu-link">
+                        <i class="fa-solid fa-laptop"></i>
+                        Online Courses<span class="icon-arrow"></span>
+                    </div>
+
+                    <div class="mega-box small">
+                        <h4 class="underlineheading">Online Professional Courses</h4>
+
+                        <div class="mega-grid small-grid">
+
+                            <div class="mega-col">
+                                <a href="web&app-online.html">Full Stack & Apps</a>
+                                <a href="digital-marketing-online.html">Digital Marketing</a>
+                                <a href="data-science-online.html">Data Science</a>
+                            </div>
+
+                            <div class="mega-col">
+                                <a href="data-analytics-online.html">Data Analytics</a>
+                                <a href="Ethical-hacking-online.html">Ethical Hacking</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <a href="services.html" class="menu-link">Services</a>
+            </div>
+
+            <!-- RIGHT -->
+            <div class="right-menu">
+                <div class="menu-toggle" id="openMenu">
+                    <span></span><span></span><span></span>
+                </div>
+                <a href="contact.html" class="color-btn">Contact</a>
+            </div>
+
+        </nav>
+    </header>
+
+    <!-- side menu -->
+    <div class="side-menu" id="mobileMenu">
+
+        <div class="close-icon" id="closeMenu">✕</div>
+
+        <div class="side-links">
+
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+
+            <div class="side-item course-campus">
+                <div class="menu-link">
+                    <i class="fa-solid fa-building-columns"></i>
+                    On-Campus Courses <span class="icon-arrow"></span>
+                </div>
+
+                <!-- side dropdom my all courses are not visible  -->
+                <div class="side-dropdown">
+
+                    <!-- COL 1 -->
+                    <div class="side-col">
+                        <h4>Design & Multimedia</h4>
+                        <a href="foundation-graphic.html">Graphic Designing</a>
+                        <a href="web-designing.html">Web Designing</a>
+                        <a href="ui&ux.html">UI & UX Design</a>
+                        <a href="animation.html">2D/3D Animation</a>
+                        <a href="motion-graphics.html">Motion Graphics</a>
+                        <a href="graphic-and-web-designing.html">Graphics & Web Designing</a>
+                        <a href="digital-content-creator.html">Digital Content Creator</a>
+                        <a href="autocad.html">Auto Cad</a>
+                    </div>
+
+                    <!-- COL 2 -->
+                    <div class="mega-col">
+                        <h4>CMS & Web Tech</h4>
+                        <a href="web-development.html">Web Development</a>
+                        <a href="fullstack-web-development.html">Full Stack Development</a>
+                        <a href="mern-stack.html">MERN Stack</a>
+                        <a href="mean-stack.html">MEAN Stack</a>
+                        <a href="php-training.html">PHP Training</a>
+                        <a href="wordpress.html">WordPress</a>
+                    </div>
+
+                    <!-- COL 3 -->
+                    <div class="mega-col">
+                        <h4>Professional Courses</h4>
+                        <a href="business-analytics.html">Data Science & Business Analytics</a>
+                        <a href="machine-learning.html">Data Science & Machine Learning</a>
+                        <a href="data-analytics.html">Data Analytics</a>
+
+                        <a href="cyber-security.html">Complete Cyber Security Course</a>
+                        <a href="ethical-hacking.html">Ethical Hacking</a>
+                        <a href="software-engineering.html">Software Engineering With Python</a>
+                    </div>
+
+                    <!-- COL 4 -->
+                    <div class="mega-col">
+                        <h4 class="bottomh4">Additional Courses</h4>
+                        <a href="system-design.html">System Design & Operating Systems</a>
+                        <a href="data-structures.html">Algorithm & Data Structures In Python</a>
+                        <a href="devops-course.html">DevOps Course</a>
+
+
+                        <h4 class="mt">Digital Marketing</h4>
+                        <a href="digital-marketing.html">Digital Marketing</a>
+                        <a href="social-media-marketing.html">Social Media Marketing</a>
+                        <a href="seo-course.html">SEO Course</a>
+                    </div>
+
+                </div>
+            </div>
+            <!-- ONLINE -->
+            <div class="side-item course-online">
+                <div class="side-title"><i class="fa-solid fa-laptop"></i>
+                    Online Courses<span class="icon-arrow"></span></div>
+                <div class="side-dropdown">
+
+                    <a href="web&app-online.html">Full Stack & Apps</a>
+                    <a href="digital-marketing-online.html">Digital Marketing</a>
+                    <a href="data-science-online.html">Data Science</a>
+                    <a href="data-analytics-online.html">Data Analytics</a>
+                    <a href="Ethical-hacking-online.html">Ethical Hacking</a>
+                </div>
+            </div>
+            <a href="industrial-training.html">Industrial Training</a>
+
+            <a href="gallery.html">Gallery</a>
+            <a href="blog.php">Blog</a>
+            <a href="career.html">Career</a>
+
+            <a href="contact.html">Contact</a>
+
         </div>
-
-        <div class="mega-box">
-        <div class="mega-grid">
-
-  <!-- COL 1 -->
-  <div class="mega-col">
-    <h4>Design & Multimedia Courses</h4>
-    <a href="foundation-graphic.html">Graphic Designing</a>
-    <a href="web-designing.html">Web Designing</a>
-    <a href="ui&ux.html">UI & UX Design</a>
-    <a href="animation.html">2D/3D Animation</a>
-    <a href="motion-graphics.html">Motion Graphics</a>
-    <a href="graphic-and-web-designing.html">Graphics & Web Designing</a>
-    <a href="digital-content-creator.html">Digital Content Creator</a>
-    <a href="autocad.html">Auto CAD</a>
-  </div>
-
-  <!-- COL 2 -->
-  <div class="mega-col">
-    <h4>CMS & Web Technologies Courses</h4>
-    <a href="web-development.html">Web Development</a>
-    <a href="fullstack-web-development.html">Full Stack Development</a>
-    <a href="mern-stack.html">MERN Stack</a>
-    <a href="mean-stack.html">MEAN Stack</a>
-    <a href="php-training.html">PHP Training</a>
-    <a href="wordpress.html">WordPress</a>
-
-    <h4>Digital Marketing Courses</h4>
-    <a href="digital-marketing.html">Digital Marketing</a>
-    <a href="social-media-marketing.html">Social Media Marketing</a>
-    <a href="seo-course.html">SEO Course</a>
-  </div>
-
-  <!-- COL 3 -->
-  <div class="mega-col">
-    <h4>Professional Training Courses</h4>
-    <a href="business-analytics.html">Data Science & Business Analytics</a>
-    <a href="machine-learning.html">Data Science & Machine Learning</a>
-    <a href="cyber-security.html">Complete Cyber Security Course</a>
-    <a href="ethical-hacking.html">Ethical Hacking</a>
-    <a href="software-engineering.html">Software Engineering With Python</a>
-
-    <h4>Additional Courses</h4>
-    <a href="system-design.html">System Design & Operating Systems</a>
-    <a href="data-structures.html">Algorithm & Data Structures In Python</a>
-    <a href="devops-course.html">DevOps Course</a>
-
-  </div>
-
-
-
-</div>
-        </div>
-      </div>
-
-      <!-- ONLINE -->
-      <div class="menu-item">
-        <div class="menu-link">
-          <i class="fa-solid fa-laptop"></i>
-          Online Courses<span class="icon-arrow"></span>
-        </div>
-
-        <div class="mega-box small">
-    <h4 class="underlineheading">Online Professional Courses</h4>
-        
-          <div class="mega-grid small-grid">
-
-  <div class="mega-col">
-    <a href="web&app-online.html">Full Stack & Apps</a>
-    <a href="digital-marketing-online.html">Digital Marketing</a>
-    <a href="data-science-online.html">Data Science</a>
-  </div>
-
-  <div class="mega-col">
-    <a href="data-analytics-online.html">Data Analytics</a>
-    <a href="Ethical-hacking-online.html">Ethical Hacking</a>
-  </div>
-
-</div>
-        </div>
-      </div>
-
-      <a href="services.html" class="menu-link">Services</a>
     </div>
-
-    <!-- RIGHT -->
-    <div class="right-menu">
-      <div class="menu-toggle" id="openMenu">
-        <span></span><span></span><span></span>
-      </div>
-      <a href="contact.html" class="color-btn">Contact</a>
-    </div>
-
-  </nav>
-</header>
-
-<!-- side menu -->
-<div class="side-menu" id="mobileMenu">
-
-  <div class="close-icon" id="closeMenu">✕</div>
-
-  <div class="side-links">
-
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-
-<div class="side-item course-campus">
-  <div class="menu-link">
-    <i class="fa-solid fa-building-columns"></i>
-    On-Campus Courses <span class="icon-arrow"></span>
-  </div>
-
-  <!-- side dropdom my all courses are not visible  -->
-  <div class="side-dropdown">
-
-    <!-- COL 1 -->
-    <div class="side-col">
-      <h4>Design & Multimedia</h4>
-     <a href="foundation-graphic.html">Graphic Designing</a>
-    <a href="web-designing.html">Web Designing</a>
-    <a href="ui&ux.html">UI & UX Design</a>
-    <a href="animation.html">2D/3D Animation</a>
-    <a href="motion-graphics.html">Motion Graphics</a>
-    <a href="graphic-and-web-designing.html">Graphics & Web Designing</a>
-    <a href="digital-content-creator.html">Digital Content Creator</a>
-    <a href="autocad.html">Auto Cad</a>
-    </div>
-
-    <!-- COL 2 -->
-    <div class="mega-col">
-      <h4>CMS & Web Tech</h4>
-         <a href="web-development.html">Web Development</a>
-      <a href="fullstack-web-development.html">Full Stack Development</a>
-    <a href="mern-stack.html">MERN Stack</a>
-    <a href="mean-stack.html">MEAN Stack</a>
-    <a href="php-training.html">PHP Training</a>
-    <a href="wordpress.html">WordPress</a>
-    </div>
-
-    <!-- COL 3 -->
-    <div class="mega-col">
-      <h4>Professional Courses</h4>
-       <a href="business-analytics.html">Data Science & Business Analytics</a>
-    <a href="machine-learning.html">Data Science & Machine Learning</a>
-    <a href="cyber-security.html">Complete Cyber Security Course</a>
-    <a href="ethical-hacking.html">Ethical Hacking</a>
-    <a href="software-engineering.html">Software Engineering With Python</a>
-    </div>
-
-    <!-- COL 4 -->
-    <div class="mega-col">
-      <h4 class="bottomh4">Additional Courses</h4>
-       <a href="system-design.html">System Design & Operating Systems</a>
-    <a href="data-structures.html">Algorithm & Data Structures In Python</a>
-    <a href="devops-course.html">DevOps Course</a>
-
-
-      <h4 class="mt">Digital Marketing</h4>
-      <a href="digital-marketing.html">Digital Marketing</a>
-    <a href="social-media-marketing.html">Social Media Marketing</a>
-    <a href="seo-course.html">SEO Course</a>
-    </div>
-
-  </div>
-</div>
-    <!-- ONLINE -->
-    <div class="side-item course-online">
-      <div class="side-title"><i class="fa-solid fa-laptop"></i>
-          Online Courses<span class="icon-arrow"></span></div>
-      <div class="side-dropdown">
-    
-    <a href="web&app-online.html">Full Stack & Apps</a>
-    <a href="digital-marketing-online.html">Digital Marketing</a>
-    <a href="data-science-online.html">Data Science</a>
-      <a href="data-analytics-online.html">Data Analytics</a>
-    <a href="Ethical-hacking-online.html">Ethical Hacking</a>
-      </div>
-    </div>
-    <a href="industrial-training.html">Industrial Training</a>
-
-    <a href="gallery.html">Gallery</a>
-    <a href="blog.php">Blog</a>
-    <a href="career.html">Career</a>
-
-    <a href="contact.html">Contact</a>
-
-  </div>
-</div>
 
     <div class="course-single container">
         <div>
@@ -251,7 +255,14 @@
         </div>
         <div>
             <h1><span>Data Science & Business Analytics</span></h1>
-            <p>Netcoder Technology offers a comprehensive Data Science & Business Analytics course in Dharamshala, Himachal Pradesh, designed for students and professionals who want to build careers in data-driven fields. As a trusted training institute in Dharamshala, we provide industry-oriented learning with practical projects, covering key areas such as Python programming, machine learning, data visualization, and business intelligence. Our expert instructors ensure that learners gain the skills required to analyze complex datasets, derive business insights, and become job-ready. Whether you are a beginner or looking to upgrade your career, this Data Science & Business Analytics training will help you unlock high-demand opportunities in IT and business sectors.
+            <p>Netcoder Technology offers a comprehensive Data Science & Business Analytics course in Dharamshala,
+                Himachal Pradesh, designed for students and professionals who want to build careers in data-driven
+                fields. As a trusted training institute in Dharamshala, we provide industry-oriented learning with
+                practical projects, covering key areas such as Python programming, machine learning, data visualization,
+                and business intelligence. Our expert instructors ensure that learners gain the skills required to
+                analyze complex datasets, derive business insights, and become job-ready. Whether you are a beginner or
+                looking to upgrade your career, this Data Science & Business Analytics training will help you unlock
+                high-demand opportunities in IT and business sectors.
             </p>
             <a href="#" onclick="openBox()" class="color-btn">Book Demo class</a>
         </div>
@@ -327,7 +338,7 @@
                 </li>
                 <!--  -->
             </ul>
-            
+
             <!-- brochure form -->
             <div class="brochure-form">
                 <div class="form">
@@ -415,7 +426,7 @@
         </div>
     </div>
     <!--  -->
-        <!-- Recomended courses  -->
+    <!-- Recomended courses  -->
     <section class="courses-moving container">
         <h2 class="recommendedcourses-heading">Recommended <span>courses</span></h2>
         <!-- TOP ROW -->
@@ -493,7 +504,7 @@
                 <a href="system-design.html" class="color-btn">Operating Systems</a>
                 <a href="data-structures.html" class="color-btn">Algorithm & Data Structures in Python</a>
                 <a href="data-structures.html" class="color-btn">Data Structures Python</a>
-                <a href="app-development.html" class="color-btn">App Development</a>
+                 <!-- <a href="app-development.html" class="color-btn">App Development</a> -->
             </div>
 
             <div class="course-row">
@@ -503,48 +514,65 @@
                 <a href="system-design.html" class="color-btn">Operating Systems</a>
                 <a href="data-structures.html" class="color-btn">Algorithm & Data Structures in Python</a>
                 <a href="data-structures.html" class="color-btn">Data Structures Python</a>
-                <a href="app-development.html" class="color-btn">App Development</a>
+                 <!-- <a href="app-development.html" class="color-btn">App Development</a> -->
             </div>
 
         </div>
     </section>
-     <!-- FAQs -->
-  <div class="accordion container">
-    <div class="headings">
+    <!-- FAQs -->
+    <div class="accordion container">
+        <div class="headings">
             <h2>Frequently Asked <span>Questions</span></h2>
-            <small>Find quick answers to the most common questions about Netcoder Technology, our training programs, and how we help you shape your IT career.</small>
+            <small>Find quick answers to the most common questions about Netcoder Technology, our training programs, and
+                how we help you shape your IT career.</small>
         </div>
-    <div class="accordion-item">
-      <div class="accordion-header active"><h5>Who can join Netcoder’s training programs?</h5></div>
-      <div class="accordion-content show">
-        <p>Our training programs are designed for fresh graduates, college students, and working professionals who want to build or upgrade their skills in IT, design, and digital domains.</p>
-      </div>
+        <div class="accordion-item">
+            <div class="accordion-header active">
+                <h5>Who can join Netcoder’s training programs?</h5>
+            </div>
+            <div class="accordion-content show">
+                <p>Our training programs are designed for fresh graduates, college students, and working professionals
+                    who want to build or upgrade their skills in IT, design, and digital domains.</p>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h5>Do I need prior experience to join?</h5>
+            </div>
+            <div class="accordion-content">
+                <p>Not at all. Many of our programs start from beginner level. You’ll be guided step-by-step, with
+                    advanced modules available for those who already have a foundation.</p>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h5>Will I get a certificate after completing training?</h5>
+            </div>
+            <div class="accordion-content">
+                <p>Yes. You’ll receive an industry-recognized certificate after completing your training, which can
+                    strengthen your resume and help you stand out in job applications.</p>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h5>Does Netcoder offer internships?</h5>
+            </div>
+            <div class="accordion-content">
+                <p>Yes, we provide internship opportunities on selected programs so that students can gain real-world
+                    work experience while learning.</p>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h5>Does Netcoder provide workshops or seminars?</h5>
+            </div>
+            <div class="accordion-content">
+                <p>Yes, Netcoder conducts workshops and seminars in various colleges and schools as well as at our own
+                    center. These sessions provide students with practical exposure, industry insights, and hands-on
+                    experiences that bridge the gap between academics and real-world IT skills.</p>
+            </div>
+        </div>
     </div>
-    <div class="accordion-item">
-      <div class="accordion-header"><h5>Do I need prior experience to join?</h5></div>
-      <div class="accordion-content">
-        <p>Not at all. Many of our programs start from beginner level. You’ll be guided step-by-step, with advanced modules available for those who already have a foundation.</p>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <div class="accordion-header"><h5>Will I get a certificate after completing training?</h5></div>
-      <div class="accordion-content">
-        <p>Yes. You’ll receive an industry-recognized certificate after completing your training, which can strengthen your resume and help you stand out in job applications.</p>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <div class="accordion-header"><h5>Does Netcoder offer internships?</h5></div>
-      <div class="accordion-content">
-        <p>Yes, we provide internship opportunities on selected programs so that students can gain real-world work experience while learning.</p>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <div class="accordion-header"><h5>Does Netcoder provide workshops or seminars?</h5></div>
-      <div class="accordion-content">
-        <p>Yes, Netcoder conducts workshops and seminars in various colleges and schools as well as at our own center. These sessions provide students with practical exposure, industry insights, and hands-on experiences that bridge the gap between academics and real-world IT skills.</p>
-      </div>
-    </div>
-  </div>
     <!-- <PopUp Form  -->
     <div class="book-demo">
         <span class="close-btn" onclick="closeForm()">×</span>
@@ -660,7 +688,7 @@
     </div>
 
     <!-- <PopUp Form Endded  -->
-   <!-- footer -->
+    <!-- footer -->
     <footer>
         <div class="container">
             <div class="newsletter">

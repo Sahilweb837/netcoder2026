@@ -184,6 +184,7 @@ if ($result) {
                                 <h4>Professional Training Courses</h4>
                                 <a href="business-analytics.html">Data Science & Business Analytics</a>
                                 <a href="machine-learning.html">Data Science & Machine Learning</a>
+                                <a href="data-analytics.html">Data Analytics</a>
                                 <a href="cyber-security.html">Complete Cyber Security Course</a>
                                 <a href="ethical-hacking.html">Ethical Hacking</a>
                                 <a href="software-engineering.html">Software Engineering With Python</a>
@@ -289,6 +290,7 @@ if ($result) {
                         <h4>Professional Courses</h4>
                         <a href="business-analytics.html">Data Science & Business Analytics</a>
                         <a href="machine-learning.html">Data Science & Machine Learning</a>
+                                <a href="data-analytics.html">Data Analytics</a>
                         <a href="cyber-security.html">Complete Cyber Security Course</a>
                         <a href="ethical-hacking.html">Ethical Hacking</a>
                         <a href="software-engineering.html">Software Engineering With Python</a>
