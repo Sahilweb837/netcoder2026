@@ -225,42 +225,68 @@ $blogs = $conn->query("SELECT * FROM blogs ORDER BY id DESC");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: #0a0a0a; color: #fff; display: flex; }
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        body { background: #fcfcfc; color: #333; display: flex; min-height: 100vh; }
         
         /* Sidebar Styles */
-        .sidebar { width: 260px; background: #111; padding: 30px 20px; border-right: 1px solid #222; min-height: 100vh; position: sticky; top: 0; }
+        .sidebar { width: 280px; background: #fff; padding: 30px 20px; border-right: 1px solid #eee; position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; }
         .logo-container { margin-bottom: 40px; text-align: center; }
-        .logo-container img { max-width: 150px; }
-        .nav-links a { display: block; padding: 12px 15px; color: #888; text-decoration: none; border-radius: 8px; margin-bottom: 5px; transition: 0.3s; }
-        .nav-links a:hover, .nav-links a.active { background: #1a1a1a; color: #ff6600; }
-        .nav-links a i { margin-right: 10px; }
+        .logo-container img { max-width: 160px; }
+        .nav-links p { color: #aaa; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; margin: 25px 0 12px 15px; font-weight: 700; }
+        .nav-links a { display: flex; align-items: center; padding: 14px 18px; color: #555; text-decoration: none; border-radius: 12px; margin-bottom: 8px; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); gap: 12px; font-weight: 500; }
+        .nav-links a i { width: 20px; font-size: 1.2rem; transition: 0.3s; }
+        .nav-links a:hover { background: #fff5f0; color: #ff6600; transform: translateX(5px); }
+        .nav-links a.active { background: #ff6600; color: #fff; box-shadow: 0 10px 20px rgba(255, 102, 0, 0.2); }
+        .nav-links a.active i { color: #fff; }
         
-        .main-content { flex: 1; padding: 40px; }
-        .form-container { background: #111; padding: 25px; border-radius: 12px; border: 1px solid #222; }
-        input, textarea, select { width: 100%; padding: 12px; margin-bottom: 15px; background: #1a1a1a; border: 1px solid #333; color: #fff; border-radius: 8px; outline: none; }
-        label { display: block; margin-bottom: 8px; font-size: 14px; color: #aaa; }
+        .main-content { flex: 1; padding: 50px; max-width: 1300px; margin: 0 auto; width: 100%; }
         
-        .submit-btn { background: #ff6600; color: white; border: none; padding: 12px 25px; cursor: pointer; border-radius: 8px; font-weight: 500; transition: 0.3s; }
-        .submit-btn:hover { background: #e65c00; }
-        .btn-cancel { background: #333; color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; margin-left: 10px; font-size: 14px; }
+        /* Dashboard Header */
+        .header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 45px; }
+        .header-title h1 { font-size: 2.2rem; color: #1a1a1a; font-weight: 700; }
+        .header-title p { color: #888; margin-top: 5px; }
+
+        /* Dashboard Cards */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 50px; }
+        .stat-card { background: #fff; border: 1px solid #eee; padding: 30px; border-radius: 24px; display: flex; align-items: center; gap: 20px; transition: 0.4s; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: #ff660044; }
+        .stat-icon { width: 64px; height: 64px; border-radius: 18px; background: #fff5f0; color: #ff6600; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
+        .stat-info h3 { font-size: 1.8rem; font-weight: 800; color: #1a1a1a; }
+        .stat-info p { color: #888; font-size: 0.95rem; font-weight: 500; }
+
+        /* Form Controls */
+        .form-container { background: #fff; padding: 40px; border-radius: 24px; border: 1px solid #eee; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
+        label { display: block; margin-bottom: 12px; font-size: 0.95rem; color: #444; font-weight: 600; }
+        input, textarea, select { width: 100%; padding: 15px 20px; margin-bottom: 25px; background: #f9f9f9; border: 2px solid #eee; color: #1a1a1a; border-radius: 12px; outline: none; transition: 0.3s; font-size: 1rem; }
+        input:focus, textarea:focus, select:focus { border-color: #ff6600; background: #fff; box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.05); }
         
-        .content-section { border: 1px dashed #444; padding: 20px; margin-bottom: 20px; position: relative; border-radius: 8px; background: #0d0d0d; }
-        .existing-section { border: 1px solid #222; background: #161616; padding: 15px; margin-bottom: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .submit-btn { background: #ff6600; color: white; border: none; padding: 16px 35px; cursor: pointer; border-radius: 12px; font-weight: 700; transition: 0.3s; width: 100%; font-size: 1.1rem; box-shadow: 0 10px 25px rgba(255, 102, 0, 0.25); }
+        .submit-btn:hover { background: #e65c00; transform: translateY(-2px); box-shadow: 0 15px 35px rgba(255, 102, 0, 0.35); }
         
-        .add-sec-btn { background: #1a1a1a; color: #ff6600; border: 1px solid #333; padding: 12px; width: 100%; cursor: pointer; margin-bottom: 30px; border-radius: 8px; font-weight: 500; }
-        .remove-btn { position: absolute; top: 10px; right: 10px; background: #dc2626; color: white; border: none; width: 25px; height: 25px; border-radius: 50%; cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center; }
+        .add-sec-btn { background: #fdfdfd; color: #ff6600; border: 2px dashed #ff660044; padding: 20px; width: 100%; cursor: pointer; margin-bottom: 35px; border-radius: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; }
+        .add-sec-btn:hover { background: #fff5f0; border-color: #ff6600; }
         
-        .alert { padding: 15px; margin-bottom: 25px; border-radius: 8px; }
-        .success { background: rgba(34, 197, 94, 0.1); color: #4ade80; border: 1px solid #22c55e; }
-        .error { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid #ef4444; }
+        .content-section { border: 2px solid #f0f0f0; padding: 30px; margin-bottom: 30px; position: relative; border-radius: 20px; background: #fbfbfb; }
+        .existing-section { border: 1px solid #eee; background: #fff; padding: 18px 25px; margin-bottom: 15px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.01); }
         
-        .blog-item { padding: 20px; background: #111; border: 1px solid #222; border-radius: 12px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
-        .blog-item:hover { border-color: #ff6600; }
-        .actions a { padding: 8px 15px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; margin-left: 10px; font-weight: 500; transition: 0.3s; }
-        .edit-btn { background: #2563eb; color: white; }
-        .delete-btn { background: #dc2626; color: white; }
+        .alert { padding: 18px 25px; margin-bottom: 35px; border-radius: 16px; display: flex; align-items: center; gap: 15px; font-weight: 600; }
+        .success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+        .error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+        
+        .blog-item { padding: 25px; background: #fff; border: 1px solid #eee; border-radius: 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; box-shadow: 0 2px 8px rgba(0,0,0,0.01); }
+        .blog-item:hover { border-color: #ff660044; transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.04); }
+        .blog-info h4 { font-size: 1.15rem; color: #1a1a1a; margin-bottom: 4px; }
+        .blog-info p { color: #888; font-size: 0.85rem; }
+
+        .actions a { padding: 12px 20px; border-radius: 10px; text-decoration: none; font-size: 0.9rem; margin-left: 12px; font-weight: 700; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; }
+        .edit-btn { background: #eff6ff; color: #2563eb; }
+        .delete-btn { background: #fef2f2; color: #dc2626; }
+        .edit-btn:hover { background: #2563eb; color: #fff; }
+        .delete-btn:hover { background: #dc2626; color: #fff; }
     </style>
 </head>
 <body>
@@ -269,19 +295,43 @@ $blogs = $conn->query("SELECT * FROM blogs ORDER BY id DESC");
             <img src="../images/logo.png" alt="Netcoder Logo">
         </div>
         <nav class="nav-links">
-            <a href="admin.php" class="active">Dashboard & Blogs</a>
-            <a href="gallery.php">Gallery Management</a>
-            <a href="logout.php">Logout</a>
+            <p>Admin Controls</p>
+            <a href="admin.php" class="active"><i class="fa-solid fa-grid-2"></i> Dashboard</a>
+            <a href="gallery.php"><i class="fa-solid fa-images"></i> Gallery Manager</a>
+            <p>Authentication</p>
+            <a href="logout.php"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</a>
         </nav>
     </div>
 
     <div class="main-content">
-        <h1><?php echo $is_editing ? 'Edit Blog' : 'Add New Blog'; ?></h1>
-        <br>
+        <div class="header-flex">
+            <div class="header-title">
+                <h1><?php echo $is_editing ? 'Modify Content' : 'Publish New Blog'; ?></h1>
+                <p>Welcome to your control center, update your audience today.</p>
+            </div>
+            <a href="admin.php" style="text-decoration:none; display:flex; align-items:center; gap:10px; background: #ff6600; color:white; padding:12px 24px; border-radius:14px; font-weight:700; box-shadow: 0 8px 15px rgba(255,102,0,0.2);"> <i class="fa-solid fa-plus"></i> Reset Form</a>
+        </div>
 
-        <?php if(isset($success)) echo "<div class='alert success'>$success</div>"; ?>
-        <?php if(isset($error)) echo "<div class='alert error'>$error</div>"; ?>
-        <?php if(isset($_GET['msg']) && $_GET['msg']=='section_deleted') echo "<div class='alert success'>Section deleted successfully.</div>"; ?>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-file-invoice"></i></div>
+                <div class="stat-info">
+                    <h3><?php echo $blogs->num_rows; ?></h3>
+                    <p>Total Articles</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-bolt"></i></div>
+                <div class="stat-info">
+                    <h3>Verified</h3>
+                    <p>Site Integrity</p>
+                </div>
+            </div>
+        </div>
+
+        <?php if(isset($success)) echo "<div class='alert success'><i class='fa-solid fa-check-circle'></i> $success</div>"; ?>
+        <?php if(isset($error)) echo "<div class='alert error'><i class='fa-solid fa-exclamation-circle'></i> $error</div>"; ?>
+        <?php if(isset($_GET['msg']) && $_GET['msg']=='section_deleted') echo "<div class='alert success'><i class='fa-solid fa-check-circle'></i> Section removed successfully.</div>"; ?>
 
         <div class="form-container">
             <form method="POST" enctype="multipart/form-data">

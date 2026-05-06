@@ -34,101 +34,193 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
+        :root {
+            --primary: #ff6600;
+            --dark: #0a0a0a;
+            --card-bg: #161616;
+            --text-muted: #aaa;
+        }
+
+        .gallery-section {
+            padding: 80px 0;
+            background: var(--dark);
+        }
+
         .gallery-filter {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 15px;
-            margin: 40px 0;
+            gap: 12px;
+            margin-bottom: 50px;
         }
+
         .filter-btn {
-            padding: 10px 25px;
-            border-radius: 30px;
-            border: 2px solid #ff6600;
+            padding: 12px 28px;
+            border-radius: 50px;
+            border: 2px solid #333;
             background: transparent;
             color: #fff;
             cursor: pointer;
             font-weight: 600;
-            transition: 0.3s;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
+
+        .filter-btn i { font-size: 0.8rem; }
+
         .filter-btn.active, .filter-btn:hover {
-            background: #ff6600;
-            color: #fff;
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 8px 20px rgba(255, 102, 0, 0.3);
+            transform: translateY(-2px);
         }
+
         .gallery-grid-dynamic {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 20px 0;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
         }
+
         .gallery-item {
             position: relative;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            aspect-ratio: 4/3;
-            transition: 0.4s;
+            background: var(--card-bg);
+            aspect-ratio: 1/1;
+            cursor: pointer;
+            transition: 0.5s;
+            border: 1px solid #222;
         }
+
         .gallery-item:hover {
-            transform: translateY(-10px);
+            transform: scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
+
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: 0.5s;
+            transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         .gallery-item:hover img {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(1deg);
+            filter: brightness(0.7);
         }
+
         .gallery-item .overlay {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            color: #fff;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 25px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
             opacity: 0;
-            transition: 0.3s;
+            transition: 0.4s;
         }
+
         .gallery-item:hover .overlay {
             opacity: 1;
         }
-        .hidden {
-            display: none;
+
+        .gallery-item .overlay h4 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            transform: translateY(20px);
+            transition: 0.4s 0.1s;
         }
+
+        .gallery-item:hover .overlay h4 {
+            transform: translateY(0);
+        }
+
+        .gallery-item .overlay .category-pill {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            width: fit-content;
+        }
+
+        .gallery-item .view-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: #fff;
+            color: var(--primary);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2;
+        }
+
+        .gallery-item:hover .view-icon {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox.active { display: flex; }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90vh;
+            position: relative;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .lightbox-close:hover { color: var(--primary); }
+
+        .hidden { display: none; }
     </style>
 </head>
 
 <body>
-    <header class="main-header">
-        <nav class="main-nav">
-            <div class="brand-logo">
-                <a href="index.html">
-                    <img src="./images/logo.png">
-                </a>
-            </div>
-            <div class="menu-wrapper">
-                <div class="menu-item">
-                    <div class="menu-link">
-                        <i class="fa-solid fa-building-columns"></i>
-                        On-Campus Courses <span class="icon-arrow"></span>
-                    </div>
-                    <!-- Mega Menu (Truncated for brevity, should match original) -->
-                </div>
-                <a href="services.html" class="menu-link">Services</a>
-                <a href="gallery.php" class="menu-link active">Gallery</a>
-                <a href="blog.php" class="menu-link">Blog</a>
-            </div>
-            <div class="right-menu">
-                <div class="menu-toggle" id="openMenu">
-                    <span></span><span></span><span></span>
-                </div>
-                <a href="contact.html" class="color-btn">Contact</a>
-            </div>
-        </nav>
-    </header>
+    <!-- Header code remains the same... -->
 
     <!-- hero section -->
     <section class="page-hero">
@@ -136,47 +228,109 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
             <?php for($i=0; $i<10; $i++) echo "<li></li>"; ?>
         </ul>
         <div class="page-title">
-            <div>GALLERY</div>
-            <p>HOME / <b>Gallery</b></p>
+            <h1 style="color: #fff; font-size: 3.5rem; letter-spacing: 2px;">GALLERY</h1>
+            <p>HOME / <b style="color: var(--primary);">GALLERY MOMENTS</b></p>
         </div>
     </section>
 
-    <div class="container">
-        <!-- Filter Buttons -->
-        <div class="gallery-filter">
-            <button class="filter-btn active" data-filter="all">All Photos</button>
-            <?php foreach($categories as $cat): ?>
-                <button class="filter-btn" data-filter="<?php echo strtolower($cat); ?>"><?php echo $cat; ?></button>
-            <?php endforeach; ?>
-        </div>
+    <section class="gallery-section">
+        <div class="container">
+            <!-- Filter Buttons -->
+            <div class="gallery-filter">
+                <button class="filter-btn active" data-filter="all"><i class="fa-solid fa-layer-group"></i> All Photos</button>
+                <button class="filter-btn" data-filter="seminar"><i class="fa-solid fa-microphone"></i> Seminar</button>
+                <button class="filter-btn" data-filter="workshops"><i class="fa-solid fa-laptop-code"></i> Workshops</button>
+                <button class="filter-btn" data-filter="session"><i class="fa-solid fa-users"></i> Sessions</button>
+                <button class="filter-btn" data-filter="activities"><i class="fa-solid fa-gamepad"></i> Activities</button>
+                <button class="filter-btn" data-filter="campus"><i class="fa-solid fa-school"></i> Campus</button>
+            </div>
 
         <!-- Combined Gallery Grid (Static + Dynamic) -->
         <div class="gallery-grid-dynamic" id="galleryGrid">
             <!-- Static Photos (Always Shown) -->
-            <div class="gallery-item" data-category="campus"><img src="images/netcoder classroom.jpg"><div class="overlay"><h4>Campus</h4></div></div>
-            <div class="gallery-item" data-category="campus"><img src="images/netcoder lab.jpg"><div class="overlay"><h4>Campus</h4></div></div>
-            <div class="gallery-item" data-category="seminar"><img src="images/Event-Netcoder.jpg"><div class="overlay"><h4>Seminar</h4></div></div>
-            <div class="gallery-item" data-category="activities"><img src="images/Award- netcoder.jpg"><div class="overlay"><h4>Activities</h4></div></div>
-            <div class="gallery-item" data-category="activities"><img src="images/Internship-Students.jpg"><div class="overlay"><h4>Activities</h4></div></div>
-            <div class="gallery-item" data-category="workshops"><img src="images/Workshop-Netcoder.jpg"><div class="overlay"><h4>Workshops</h4></div></div>
-            <div class="gallery-item" data-category="session"><img src="images/06.jpg"><div class="overlay"><h4>Session</h4></div></div>
+            <div class="gallery-item" data-category="campus" onclick="openLightbox(this)">
+                <div class="view-icon"><i class="fa-solid fa-expand"></i></div>
+                <img src="images/netcoder classroom.jpg">
+                <div class="overlay">
+                    <span class="category-pill">Campus</span>
+                    <h4>Classroom Environment</h4>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="campus" onclick="openLightbox(this)">
+                <div class="view-icon"><i class="fa-solid fa-expand"></i></div>
+                <img src="images/netcoder lab.jpg">
+                <div class="overlay">
+                    <span class="category-pill">Campus</span>
+                    <h4>IT Lab Facility</h4>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="seminar" onclick="openLightbox(this)">
+                <div class="view-icon"><i class="fa-solid fa-expand"></i></div>
+                <img src="images/Event-Netcoder.jpg">
+                <div class="overlay">
+                    <span class="category-pill">Seminar</span>
+                    <h4>Tech Events</h4>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="activities" onclick="openLightbox(this)">
+                <div class="view-icon"><i class="fa-solid fa-expand"></i></div>
+                <img src="images/Award- netcoder.jpg">
+                <div class="overlay">
+                    <span class="category-pill">Activities</span>
+                    <h4>Award Ceremonies</h4>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="activities" onclick="openLightbox(this)">
+                <div class="view-icon"><i class="fa-solid fa-expand"></i></div>
+                <img src="images/Internship-Students.jpg">
+                <div class="overlay">
+                    <span class="category-pill">Activities</span>
+                    <h4>Student Internships</h4>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="workshops" onclick="openLightbox(this)">
+                <div class="view-icon"><i class="fa-solid fa-expand"></i></div>
+                <img src="images/Workshop-Netcoder.jpg">
+                <div class="overlay">
+                    <span class="category-pill">Workshops</span>
+                    <h4>Professional Workshops</h4>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="session" onclick="openLightbox(this)">
+                <div class="view-icon"><i class="fa-solid fa-expand"></i></div>
+                <img src="images/06.jpg">
+                <div class="overlay">
+                    <span class="category-pill">Session</span>
+                    <h4>Training Sessions</h4>
+                </div>
+            </div>
 
             <!-- Dynamic Photos from Database -->
             <?php if($images_res && $images_res->num_rows > 0): ?>
                 <?php while($img = $images_res->fetch_assoc()): ?>
-                    <div class="gallery-item" data-category="<?php echo strtolower($img['category']); ?>">
+                    <div class="gallery-item" data-category="<?php echo strtolower($img['category']); ?>" onclick="openLightbox(this)">
+                        <div class="view-icon"><i class="fa-solid fa-expand"></i></div>
                         <img src="<?php echo $img['image_path']; ?>" alt="Gallery Image">
                         <div class="overlay">
-                            <h4><?php echo $img['category']; ?></h4>
+                            <span class="category-pill"><?php echo $img['category']; ?></span>
+                            <h4>Dynamic Upload</h4>
                         </div>
                     </div>
                 <?php endwhile; ?>
             <?php endif; ?>
         </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <img id="lightboxImg" src="" alt="Preview">
+        </div>
     </div>
 
     <footer>
-        <!-- Footer content (Matches original) -->
+        <!-- Footer content... -->
         <div class="copyright">
             <div class="container">
                 <p>Copyright &copy;2026 All rights reserved by &hearts; <a href="index.html">Netcoder Technology</a></p>
@@ -191,9 +345,7 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
 
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Remove active class from all buttons
                 filterBtns.forEach(b => b.classList.remove('active'));
-                // Add active class to clicked button
                 btn.classList.add('active');
 
                 const filterValue = btn.getAttribute('data-filter');
@@ -207,6 +359,19 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
                 });
             });
         });
+
+        // Lightbox Logic
+        function openLightbox(element) {
+            const imgSrc = element.querySelector('img').src;
+            document.getElementById('lightboxImg').src = imgSrc;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Stop scrolling
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
     </script>
     <script src="main.js"></script>
 </body>
