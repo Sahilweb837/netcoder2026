@@ -226,37 +226,53 @@ $blogs = $conn->query("SELECT * FROM blogs ORDER BY id DESC");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: #0a0a0a; color: #fff; display: flex; }
-        .sidebar { width: 250px; background: #111; padding: 20px; border-right: 1px solid #333; min-height: 100vh; }
-        .main-content { flex: 1; padding: 30px; }
-        .form-container { background: #1a1a1a; padding: 20px; border-radius: 8px; border: 1px solid #333; }
-        input, textarea { width: 100%; padding: 10px; margin-bottom: 15px; background: #222; border: 1px solid #444; color: #fff; border-radius: 4px; }
-        label { display: block; margin-bottom: 5px; color: #ccc; }
-        .submit-btn { background: #ff6600; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px; }
-        .btn-cancel { background: #555; color: white; text-decoration: none; padding: 10px 20px; border-radius: 4px; margin-left: 10px; }
         
-        .content-section { border: 1px dashed #555; padding: 15px; margin-bottom: 15px; position: relative; }
-        .existing-section { border: 1px solid #333; background: #111; padding: 10px; margin-bottom: 10px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
+        /* Sidebar Styles */
+        .sidebar { width: 260px; background: #111; padding: 30px 20px; border-right: 1px solid #222; min-height: 100vh; position: sticky; top: 0; }
+        .logo-container { margin-bottom: 40px; text-align: center; }
+        .logo-container img { max-width: 150px; }
+        .nav-links a { display: block; padding: 12px 15px; color: #888; text-decoration: none; border-radius: 8px; margin-bottom: 5px; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { background: #1a1a1a; color: #ff6600; }
+        .nav-links a i { margin-right: 10px; }
         
-        .add-sec-btn { background: #333; color: white; border: 1px solid #555; padding: 8px; width: 100%; cursor: pointer; margin-bottom: 20px; }
-        .remove-btn { position: absolute; top: 5px; right: 5px; background: red; color: white; border: none; padding: 2px 8px; cursor: pointer; }
+        .main-content { flex: 1; padding: 40px; }
+        .form-container { background: #111; padding: 25px; border-radius: 12px; border: 1px solid #222; }
+        input, textarea, select { width: 100%; padding: 12px; margin-bottom: 15px; background: #1a1a1a; border: 1px solid #333; color: #fff; border-radius: 8px; outline: none; }
+        label { display: block; margin-bottom: 8px; font-size: 14px; color: #aaa; }
         
-        .alert { padding: 10px; margin-bottom: 20px; border-radius: 4px; }
-        .success { background: #1e3a29; color: #4ade80; border: 1px solid #22c55e; }
-        .error { background: #3f1a1a; color: #f87171; border: 1px solid #ef4444; }
+        .submit-btn { background: #ff6600; color: white; border: none; padding: 12px 25px; cursor: pointer; border-radius: 8px; font-weight: 500; transition: 0.3s; }
+        .submit-btn:hover { background: #e65c00; }
+        .btn-cancel { background: #333; color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; margin-left: 10px; font-size: 14px; }
         
-        .blog-item { padding: 15px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
-        .actions a { padding: 5px 10px; border-radius: 4px; text-decoration: none; font-size: 0.9rem; margin-left: 5px; }
+        .content-section { border: 1px dashed #444; padding: 20px; margin-bottom: 20px; position: relative; border-radius: 8px; background: #0d0d0d; }
+        .existing-section { border: 1px solid #222; background: #161616; padding: 15px; margin-bottom: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
+        
+        .add-sec-btn { background: #1a1a1a; color: #ff6600; border: 1px solid #333; padding: 12px; width: 100%; cursor: pointer; margin-bottom: 30px; border-radius: 8px; font-weight: 500; }
+        .remove-btn { position: absolute; top: 10px; right: 10px; background: #dc2626; color: white; border: none; width: 25px; height: 25px; border-radius: 50%; cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center; }
+        
+        .alert { padding: 15px; margin-bottom: 25px; border-radius: 8px; }
+        .success { background: rgba(34, 197, 94, 0.1); color: #4ade80; border: 1px solid #22c55e; }
+        .error { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid #ef4444; }
+        
+        .blog-item { padding: 20px; background: #111; border: 1px solid #222; border-radius: 12px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+        .blog-item:hover { border-color: #ff6600; }
+        .actions a { padding: 8px 15px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; margin-left: 10px; font-weight: 500; transition: 0.3s; }
         .edit-btn { background: #2563eb; color: white; }
         .delete-btn { background: #dc2626; color: white; }
     </style>
 </head>
 <body>
     <div class="sidebar">
-        <h2 style="color: #ff6600; margin-bottom: 20px;">Admin</h2>
-        <a href="admin.php" style="color: white; text-decoration: none;">Dashboard</a><br><br>
-        <a href="logout.php" style="color: #888; text-decoration: none;">Logout</a>
+        <div class="logo-container">
+            <img src="../images/logo.png" alt="Netcoder Logo">
+        </div>
+        <nav class="nav-links">
+            <a href="admin.php" class="active">Dashboard & Blogs</a>
+            <a href="gallery.php">Gallery Management</a>
+            <a href="logout.php">Logout</a>
+        </nav>
     </div>
 
     <div class="main-content">

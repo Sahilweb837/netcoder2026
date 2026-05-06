@@ -7,7 +7,7 @@ echo "<h2>Starting Database Repair...</h2>";
 $check = $conn->query("SHOW COLUMNS FROM blogs LIKE 'slug'");
 if ($check->num_rows == 0) {
     $conn->query("ALTER TABLE blogs ADD COLUMN slug VARCHAR(255) NOT NULL AFTER title");
-    echo "✅ Added 'slug' column.<br>";
+    echo " Added 'slug' column.<br>";
 } else {
     echo "info: 'slug' column already exists.<br>";
 }
@@ -19,10 +19,10 @@ if ($check_main->num_rows == 0) {
     $check_old = $conn->query("SHOW COLUMNS FROM blogs LIKE 'content'");
     if ($check_old->num_rows > 0) {
         $conn->query("ALTER TABLE blogs CHANGE content main_content TEXT");
-        echo "✅ Renamed old 'content' to 'main_content'.<br>";
+        echo " Renamed old 'content' to 'main_content'.<br>";
     } else {
         $conn->query("ALTER TABLE blogs ADD COLUMN main_content TEXT AFTER excerpt");
-        echo "✅ Created 'main_content' column.<br>";
+        echo " Created 'main_content' column.<br>";
     }
 } else {
     echo "info: 'main_content' column already exists.<br>";
@@ -34,10 +34,10 @@ if ($check_img->num_rows == 0) {
     $check_old_img = $conn->query("SHOW COLUMNS FROM blogs LIKE 'image_path'");
     if ($check_old_img->num_rows > 0) {
         $conn->query("ALTER TABLE blogs CHANGE image_path main_image VARCHAR(255)");
-        echo "✅ Renamed old 'image_path' to 'main_image'.<br>";
+        echo " Renamed old 'image_path' to 'main_image'.<br>";
     } else {
         $conn->query("ALTER TABLE blogs ADD COLUMN main_image VARCHAR(255) AFTER author");
-        echo "✅ Created 'main_image' column.<br>";
+        echo " Created 'main_image' column.<br>";
     }
 } else {
     echo "info: 'main_image' column already exists.<br>";
@@ -54,11 +54,25 @@ $sql_sections = "CREATE TABLE IF NOT EXISTS blog_sections (
 )";
 
 if ($conn->query($sql_sections) === TRUE) {
-    echo "✅ Table 'blog_sections' is ready.<br>";
+    echo " Table 'blog_sections' is ready.<br>";
 } else {
-    echo "❌ Error creating table: " . $conn->error . "<br>";
+    echo " Error creating table: " . $conn->error . "<br>";
 }
 
-echo "<hr><h3>🎉 Database Fixed Successfully!</h3>";
+// 5. Create the 'gallery' table
+$sql_gallery = "CREATE TABLE IF NOT EXISTS gallery (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    image_path VARCHAR(255) NOT NULL,
+    category VARCHAR(100) DEFAULT 'General',
+    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+
+if ($conn->query($sql_gallery) === TRUE) {
+    echo " Table 'gallery' is ready.<br>";
+} else {
+    echo " Error creating table: " . $conn->error . "<br>";
+}
+
+echo "<hr><h3> Database Fixed Successfully!</h3>";
 echo "<p>You can now delete this file and go back to <a href='admin.php'>admin.php</a>.</p>";
 ?>

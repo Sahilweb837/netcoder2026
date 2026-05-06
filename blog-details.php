@@ -339,7 +339,7 @@ if (isset($_GET['slug'])) {
             </div>
             <a href="industrial-training.html">Industrial Training</a>
 
-            <a href="gallery.html">Gallery</a>
+            <a href="gallery.php">Gallery</a>
             <a href="blog.php">Blog</a>
             <a href="career.html">Career</a>
 
@@ -436,7 +436,7 @@ if (isset($_GET['slug'])) {
                         <h5>Quick Links</h5>
                     </li>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="gallery.php">Gallery</a></li>
                     <li><a href="career.html">Carrer</a></li>
                     <li><a href="privacy-policy.html">Privacy & Policy</a></li>
                 </ul>
