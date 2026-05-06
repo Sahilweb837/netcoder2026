@@ -228,6 +228,32 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
 
         .lightbox-close:hover { color: var(--primary); transform: rotate(90deg); }
 
+        .single-delete { color: #dc2626; text-decoration: none; font-size: 1.1rem; transition: 0.3s; }
+        .single-delete:hover { transform: scale(1.2); }
+
+        /* Mobile Dropdown for Filter */
+        .gallery-filter-mobile {
+            display: none;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        .gallery-filter-mobile select {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: 2px solid var(--primary);
+            background: #fff;
+            color: #333;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-filter { display: none; }
+            .gallery-filter-mobile { display: block; }
+        }
+
         .hidden { display: none; }
     </style>
 </head>
@@ -465,6 +491,18 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
                 <button class="filter-btn" data-filter="campus"><i class="fa-solid fa-school"></i> Campus</button>
             </div>
 
+            <!-- Mobile Filter Dropdown -->
+            <div class="gallery-filter-mobile">
+                <select id="mobileFilter">
+                    <option value="all">All Photos</option>
+                    <option value="seminar">Seminar</option>
+                    <option value="workshops">Workshops</option>
+                    <option value="session">Sessions</option>
+                    <option value="activities">Activities</option>
+                    <option value="campus">Campus</option>
+                </select>
+            </div>
+
         <!-- Combined Gallery Grid (Static + Dynamic) -->
         <div class="gallery-grid-dynamic" id="galleryGrid">
             <!-- Static Photos (Always Shown) -->
@@ -533,7 +571,7 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
                         <img src="<?php echo $img['image_path']; ?>" alt="Gallery Image">
                         <div class="overlay">
                             <span class="category-pill"><?php echo $img['category']; ?></span>
-                            <h4>Dynamic Upload</h4>
+                            <h4><?php echo htmlspecialchars($img['category']); ?> Moment</h4>
                         </div>
                     </div>
                 <?php endwhile; ?>
@@ -665,20 +703,31 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
         const filterBtns = document.querySelectorAll('.filter-btn');
         const galleryItems = document.querySelectorAll('.gallery-item');
 
+        // Dropdown filter for mobile
+        const mobileFilter = document.getElementById('mobileFilter');
+        if(mobileFilter){
+            mobileFilter.addEventListener('change', function(){
+                const filter = this.value;
+                filterGallery(filter);
+            });
+        }
+
+        function filterGallery(filter){
+            galleryItems.forEach(item => {
+                if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-
                 const filterValue = btn.getAttribute('data-filter');
-
-                galleryItems.forEach(item => {
-                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
-                        item.classList.remove('hidden');
-                    } else {
-                        item.classList.add('hidden');
-                    }
-                });
+                filterGallery(filterValue);
             });
         });
 

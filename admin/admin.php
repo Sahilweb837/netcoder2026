@@ -188,27 +188,56 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    if (isset($blog_id) && isset($_POST['section_title'])) {
-        $section_titles = $_POST['section_title'];
-        $section_contents = $_POST['section_content'];
-        
-        for ($i = 0; $i < count($section_titles); $i++) {
-            $s_title = $conn->real_escape_string($section_titles[$i]);
-            $s_content = $conn->real_escape_string($section_contents[$i]);
-            $s_image_path = '';
-
-            if (isset($_FILES['section_image']['name'][$i]) && $_FILES['section_image']['error'][$i] == 0) {
-                $s_img_name = time() . "_sec{$i}_" . basename($_FILES['section_image']['name'][$i]);
-                $s_target = $target_dir . $s_img_name;
-                if (move_uploaded_file($_FILES['section_image']['tmp_name'][$i], $s_target)) {
-                    $s_image_path = "uploads/blog_images/" . $s_img_name;
+    // --- HANDLE SECTIONS (Update & Create) ---
+    if (isset($blog_id)) {
+        // 1. Handle Existing Sections Update
+        if (isset($_POST['existing_section_id'])) {
+            $e_ids = $_POST['existing_section_id'];
+            $e_titles = $_POST['existing_section_title'];
+            $e_contents = $_POST['existing_section_content'];
+            
+            for ($j = 0; $j < count($e_ids); $j++) {
+                $eid = intval($e_ids[$j]);
+                $etitle = $conn->real_escape_string($e_titles[$j]);
+                $econtent = $conn->real_escape_string($e_contents[$j]);
+                
+                // Handle image update for existing section
+                if (isset($_FILES['existing_section_image']['name'][$j]) && $_FILES['existing_section_image']['error'][$j] == 0) {
+                    $s_img_name = time() . "_sec_update_{$j}_" . basename($_FILES['existing_section_image']['name'][$j]);
+                    $s_target = $target_dir . $s_img_name;
+                    if (move_uploaded_file($_FILES['existing_section_image']['tmp_name'][$j], $s_target)) {
+                        $new_path = "uploads/blog_images/" . $s_img_name;
+                        $conn->query("UPDATE blog_sections SET section_image = '$new_path' WHERE id = $eid");
+                    }
                 }
+                
+                $conn->query("UPDATE blog_sections SET section_title = '$etitle', section_content = '$econtent' WHERE id = $eid");
             }
+        }
 
-            if(!empty($s_title) || !empty($s_content) || !empty($s_image_path)){
-                $sec_stmt = $conn->prepare("INSERT INTO blog_sections (blog_id, section_title, section_content, section_image) VALUES (?, ?, ?, ?)");
-                $sec_stmt->bind_param("isss", $blog_id, $s_title, $s_content, $s_image_path);
-                $sec_stmt->execute();
+        // 2. Handle New Sections Insertion
+        if (isset($_POST['section_title'])) {
+            $section_titles = $_POST['section_title'];
+            $section_contents = $_POST['section_content'];
+            
+            for ($i = 0; $i < count($section_titles); $i++) {
+                $s_title = $conn->real_escape_string($section_titles[$i]);
+                $s_content = $conn->real_escape_string($section_contents[$i]);
+                $s_image_path = '';
+
+                if (isset($_FILES['section_image']['name'][$i]) && $_FILES['section_image']['error'][$i] == 0) {
+                    $s_img_name = time() . "_sec_new_{$i}_" . basename($_FILES['section_image']['name'][$i]);
+                    $s_target = $target_dir . $s_img_name;
+                    if (move_uploaded_file($_FILES['section_image']['tmp_name'][$i], $s_target)) {
+                        $s_image_path = "uploads/blog_images/" . $s_img_name;
+                    }
+                }
+
+                if(!empty($s_title) || !empty($s_content) || !empty($s_image_path)){
+                    $sec_stmt = $conn->prepare("INSERT INTO blog_sections (blog_id, section_title, section_content, section_image) VALUES (?, ?, ?, ?)");
+                    $sec_stmt->bind_param("isss", $blog_id, $s_title, $s_content, $s_image_path);
+                    $sec_stmt->execute();
+                }
             }
         }
     }
@@ -387,16 +416,34 @@ $blogs = $conn->query("SELECT * FROM blogs ORDER BY id DESC");
                 <input type="file" name="image">
 
                 <?php if($is_editing && !empty($existing_sections)): ?>
-                    <h3 style="margin: 20px 0;">Existing Content Sections</h3>
-                    <?php foreach($existing_sections as $es): ?>
-                        <div class="existing-section">
-                            <div>
-                                <strong><?php echo htmlspecialchars($es['section_title']); ?></strong><br>
-                                <small><?php echo substr(htmlspecialchars($es['section_content']), 0, 50); ?>...</small>
+                    <h3 style="margin: 30px 0 20px;">Manage Existing Sections</h3>
+                    <?php foreach($existing_sections as $index => $es): ?>
+                        <div class="content-section" style="border: 2px solid #ff660022; background: #fff;">
+                            <input type="hidden" name="existing_section_id[]" value="<?php echo $es['id']; ?>">
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <div style="display: flex; align-items: center; gap: 10px; color: #ff6600;">
+                                    <i class="fa-solid fa-file-pen"></i>
+                                    <h4 style="margin:0;">Section #<?php echo $index + 1; ?></h4>
+                                </div>
+                                <a href="admin.php?edit_id=<?php echo $edit_id; ?>&delete_section_id=<?php echo $es['id']; ?>" 
+                                   onclick="return confirm('Permanently delete this section?')" 
+                                   style="background: #fef2f2; color: #dc2626; padding: 6px 12px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; font-weight: 700;">
+                                   <i class="fa-solid fa-trash-can"></i> Remove
+                                </a>
                             </div>
-                            <a href="admin.php?edit_id=<?php echo $edit_id; ?>&delete_section_id=<?php echo $es['id']; ?>" 
-                               onclick="return confirm('Delete this section?')" 
-                               style="color:red; text-decoration:none;">Delete</a>
+
+                            <label>Section Title</label>
+                            <input type="text" name="existing_section_title[]" value="<?php echo htmlspecialchars($es['section_title']); ?>">
+
+                            <label>Section Content</label>
+                            <textarea name="existing_section_content[]" rows="4"><?php echo htmlspecialchars($es['section_content']); ?></textarea>
+
+                            <label>Update Section Image</label>
+                            <?php if(!empty($es['section_image'])): ?>
+                                <img src="../<?php echo $es['section_image']; ?>" style="height:60px; border-radius:8px; margin-bottom:10px; display:block;">
+                            <?php endif; ?>
+                            <input type="file" name="existing_section_image[]">
                         </div>
                     <?php endforeach; ?>
                 <?php endif; ?>

@@ -120,13 +120,26 @@ if (isset($_GET['slug'])) {
         
         /* Dynamic Sections */
         .content-block {
-            margin-top: 40px;
-            padding-top: 20px;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px dashed #eee;
         }
         .content-block h2 {
-            color: #ff6600;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
+            color: #222;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .section-image-wrapper {
+            margin: 25px 0;
+            text-align: center;
+        }
+        .section-image {
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         }
 
         /* Responsive */
@@ -397,14 +410,16 @@ if (isset($_GET['slug'])) {
                                 <h2><?php echo htmlspecialchars($sec['section_title']); ?></h2>
                             <?php endif; ?>
 
-                            <?php if (!empty($sec['section_content'])): ?>
-                                <div class="article-body">
-                                    <?php echo nl2br($sec['section_content']); ?>
+                            <?php if (!empty($sec['section_image'])): ?>
+                                <div class="section-image-wrapper">
+                                    <img src="<?php echo htmlspecialchars($sec['section_image']); ?>" alt="Section visual" class="section-image">
                                 </div>
                             <?php endif; ?>
 
-                            <?php if (!empty($sec['section_image'])): ?>
-                                <img src="<?php echo htmlspecialchars($sec['section_image']); ?>" alt="Section visual" class="section-image">
+                            <?php if (!empty($sec['section_content'])): ?>
+                                <div class="article-body">
+                                    <?php echo nl2br(htmlspecialchars($sec['section_content'])); ?>
+                                </div>
                             <?php endif; ?>
                         </div>
                     <?php endwhile; ?>

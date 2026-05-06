@@ -700,28 +700,7 @@ $blogs_res = $conn->query($sql);
         </div>
     </div>
 
-    <div class="success-overlay" id="successModal">
-        <div class="success-card">
-            <div class="accent-bar"></div>
-            <span class="close-x" id="closeSuccessBtn">&times;</span>
-            <div id="confettiContainer"></div>
-            <div class="check-circle"><span>&#10004;</span></div>
-            <h3>Booking Confirmed!</h3>
-            <p class="user-greeting">Thank you <strong id="successUserName"></strong>!<br>Your information was successfully received by <strong>Netcoder Technology</strong>.</p>
-            <div class="info-card">
-                <div class="info-row">
-                    <div class="info-icon" style="background:#fff3e0;">&#9200;</div>
-                    <div><div class="info-label">Slot</div><div class="info-value" id="successSlotText"></div></div>
-                </div>
-                <div class="info-row">
-                    <div class="info-icon" style="background:#e8f5e9;">&#128197;</div>
-                    <div><div class="info-label">Date</div><div class="info-value" id="successDateText"></div></div>
-                </div>
-            </div>
-            <button class="ok-btn" id="successOkBtn">Got It!</button>
-        </div>
-    </div>
-
+ 
     <footer>
         <div class="container">
             <div class="newsletter">
