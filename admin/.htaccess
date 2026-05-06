@@ -1,0 +1,14 @@
+# Disable directory indexing
+Options -Indexes
+
+# Protect .sql files
+<Files "*.sql">
+    Order Deny,Allow
+    Deny from all
+</Files>
+
+# Protect config files
+<Files "config.php">
+    Order Deny,Allow
+    Deny from all
+</Files>

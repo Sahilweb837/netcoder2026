@@ -150,8 +150,18 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
             <?php endforeach; ?>
         </div>
 
-        <!-- Dynamic Gallery Grid -->
+        <!-- Combined Gallery Grid (Static + Dynamic) -->
         <div class="gallery-grid-dynamic" id="galleryGrid">
+            <!-- Static Photos (Always Shown) -->
+            <div class="gallery-item" data-category="campus"><img src="images/netcoder classroom.jpg"><div class="overlay"><h4>Campus</h4></div></div>
+            <div class="gallery-item" data-category="campus"><img src="images/netcoder lab.jpg"><div class="overlay"><h4>Campus</h4></div></div>
+            <div class="gallery-item" data-category="seminar"><img src="images/Event-Netcoder.jpg"><div class="overlay"><h4>Seminar</h4></div></div>
+            <div class="gallery-item" data-category="activities"><img src="images/Award- netcoder.jpg"><div class="overlay"><h4>Activities</h4></div></div>
+            <div class="gallery-item" data-category="activities"><img src="images/Internship-Students.jpg"><div class="overlay"><h4>Activities</h4></div></div>
+            <div class="gallery-item" data-category="workshops"><img src="images/Workshop-Netcoder.jpg"><div class="overlay"><h4>Workshops</h4></div></div>
+            <div class="gallery-item" data-category="session"><img src="images/06.jpg"><div class="overlay"><h4>Session</h4></div></div>
+
+            <!-- Dynamic Photos from Database -->
             <?php if($images_res && $images_res->num_rows > 0): ?>
                 <?php while($img = $images_res->fetch_assoc()): ?>
                     <div class="gallery-item" data-category="<?php echo strtolower($img['category']); ?>">
@@ -161,12 +171,6 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
                         </div>
                     </div>
                 <?php endwhile; ?>
-            <?php else: ?>
-                <!-- Fallback to static images if DB is empty -->
-                <div class="gallery-item" data-category="campus"><img src="images/netcoder classroom.jpg"></div>
-                <div class="gallery-item" data-category="campus"><img src="images/netcoder lab.jpg"></div>
-                <div class="gallery-item" data-category="seminar"><img src="images/Event-Netcoder.jpg"></div>
-                <div class="gallery-item" data-category="activities"><img src="images/Award- netcoder.jpg"></div>
             <?php endif; ?>
         </div>
     </div>

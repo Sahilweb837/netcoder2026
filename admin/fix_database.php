@@ -1,5 +1,12 @@
 <?php
+session_start();
 require_once '../config.php';
+
+// Check Login
+if (!isset($_SESSION['admin_logged_in'])) {
+    header('Location: login.php');
+    exit();
+}
 
 echo "<h2>Starting Database Repair...</h2>";
 
