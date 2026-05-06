@@ -64,11 +64,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['gallery_image'])) {
     }
     
     if ($success_count > 0) {
-        $success = "$success_count images uploaded successfully to $category!";
+        $_SESSION['success_msg'] = "$success_count images uploaded successfully to $category!";
     } else {
-        $error = "Failed to upload images.";
+        $_SESSION['error_msg'] = "Failed to upload images.";
+    }
+    header("Location: gallery.php");
+    exit();
+}
+
+$success = $_SESSION['success_msg'] ?? null;
+if (!$success) {
+    if (isset($_GET['msg'])) {
+        if ($_GET['msg'] == 'deleted') $success = "Image deleted successfully.";
+        if ($_GET['msg'] == 'bulk_deleted') $success = "Selected images deleted successfully.";
     }
 }
+$error = isset($_SESSION['error_msg']) ? $_SESSION['error_msg'] : null;
+unset($_SESSION['success_msg'], $_SESSION['error_msg']);
 
 // Fetch Gallery Images
 $images = $conn->query("SELECT * FROM gallery ORDER BY id DESC");

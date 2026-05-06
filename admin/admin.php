@@ -188,7 +188,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // --- SAVE NEW SECTIONS (Common for Create & Update) ---
     if (isset($blog_id) && isset($_POST['section_title'])) {
         $section_titles = $_POST['section_title'];
         $section_contents = $_POST['section_content'];
@@ -213,7 +212,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
     }
+
+    if (isset($success)) $_SESSION['blog_success'] = $success;
+    if (isset($error)) $_SESSION['blog_error'] = $error;
+    header("Location: admin.php" . ($is_editing ? "?edit_id=$blog_id" : ""));
+    exit();
 }
+
+$success = $_SESSION['blog_success'] ?? ($_GET['msg'] == 'deleted' ? 'Blog deleted successfully!' : null);
+$error = $_SESSION['blog_error'] ?? null;
+unset($_SESSION['blog_success'], $_SESSION['blog_error']);
 
 // Fetch Blogs for List
 $blogs = $conn->query("SELECT * FROM blogs ORDER BY id DESC");
