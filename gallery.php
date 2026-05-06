@@ -89,8 +89,27 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
 
         .gallery-grid-dynamic {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 1200px) {
+            .gallery-grid-dynamic {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .gallery-grid-dynamic {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .gallery-grid-dynamic {
+                grid-template-columns: repeat(1, 1fr);
+                gap: 15px;
+            }
         }
 
         .gallery-item {
