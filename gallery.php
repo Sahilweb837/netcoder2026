@@ -665,8 +665,11 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
         // Lightbox Logic
         function openLightbox(element) {
             const imgSrc = element.querySelector('img').src;
-            document.getElementById('lightboxImg').src = imgSrc;
-            document.getElementById('lightbox').classList.add('active');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            
+            lightboxImg.src = imgSrc;
+            lightbox.classList.add('active');
             document.body.style.overflow = 'hidden'; // Stop scrolling
         }
 
@@ -674,7 +677,11 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
             document.getElementById('lightbox').classList.remove('active');
             document.body.style.overflow = 'auto'; // Restore scrolling
         }
+
+        // Close lightbox on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
     </script>
-    <script src="main.js"></script>
 </body>
 </html>

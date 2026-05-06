@@ -326,6 +326,16 @@ $blogs = $conn->query("SELECT * FROM blogs ORDER BY id DESC");
                 </div>
             </div>
             <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-images"></i></div>
+                <div class="stat-info">
+                    <h3><?php 
+                        $g_count = $conn->query("SELECT COUNT(*) as total FROM gallery")->fetch_assoc();
+                        echo $g_count['total']; 
+                    ?></h3>
+                    <p>Gallery Photos</p>
+                </div>
+            </div>
+            <div class="stat-card">
                 <div class="stat-icon"><i class="fa-solid fa-bolt"></i></div>
                 <div class="stat-info">
                     <h3>Verified</h3>
@@ -400,22 +410,35 @@ $blogs = $conn->query("SELECT * FROM blogs ORDER BY id DESC");
             </form>
         </div>
 
-        <br><hr><br>
-        <h2>Recent Blogs</h2>
-        <?php if($blogs): ?>
-            <?php while($row = $blogs->fetch_assoc()): ?>
-                <div class="blog-item">
-                    <div>
-                        <strong><?php echo htmlspecialchars($row['title']); ?></strong><br>
-                        <small style="color: #888;">Slug: <?php echo $row['slug']; ?></small>
+        <div style="margin-top: 60px;">
+            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 30px;">
+                <div style="width: 5px; height: 30px; background: #ff6600; border-radius: 5px;"></div>
+                <h2 style="font-size: 1.6rem; color: #1a1a1a;">Manage Existing Blogs</h2>
+            </div>
+            
+            <?php if($blogs && $blogs->num_rows > 0): ?>
+                <?php while($row = $blogs->fetch_assoc()): ?>
+                    <div class="blog-item">
+                        <div class="blog-info">
+                            <h4><?php echo htmlspecialchars($row['title']); ?></h4>
+                            <p><i class="fa-solid fa-link" style="font-size: 0.75rem;"></i> <?php echo $row['slug']; ?></p>
+                        </div>
+                        <div class="actions">
+                            <a href="admin.php?edit_id=<?php echo $row['id']; ?>" class="edit-btn">
+                                <i class="fa-solid fa-pen-to-square"></i> Edit
+                            </a>
+                            <a href="admin.php?delete_id=<?php echo $row['id']; ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this blog?');">
+                                <i class="fa-solid fa-trash-can"></i> Delete
+                            </a>
+                        </div>
                     </div>
-                    <div class="actions">
-                        <a href="admin.php?edit_id=<?php echo $row['id']; ?>" class="edit-btn">Edit</a>
-                        <a href="admin.php?delete_id=<?php echo $row['id']; ?>" class="delete-btn" onclick="return confirm('Are you sure?');">Delete</a>
-                    </div>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <div style="text-align: center; padding: 50px; background: #fff; border-radius: 20px; border: 1px dashed #ddd;">
+                    <p style="color: #999;">No blogs published yet. Start by writing your first post!</p>
                 </div>
-            <?php endwhile; ?>
-        <?php endif; ?>
+            <?php endif; ?>
+        </div>
     </div>
 
     <script>
@@ -427,15 +450,21 @@ $blogs = $conn->query("SELECT * FROM blogs ORDER BY id DESC");
             const div = document.createElement('div');
             div.className = 'content-section';
             div.innerHTML = `
-                <button type="button" class="remove-btn" onclick="this.parentElement.remove()">X</button>
+                <button type="button" class="remove-btn" onclick="this.parentElement.remove()" style="position: absolute; top: 15px; right: 15px; background: #dc2626; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: 700;">&times;</button>
+                <div style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px; color: #ff6600;">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <h4 style="margin:0;">New Section Content</h4>
+                </div>
                 <label>Section Title</label>
-                <input type="text" name="section_title[]">
+                <input type="text" name="section_title[]" placeholder="Enter section heading...">
                 <label>Section Content</label>
-                <textarea name="section_content[]" rows="4"></textarea>
-                <label>Section Image</label>
+                <textarea name="section_content[]" rows="4" placeholder="Enter section body text..."></textarea>
+                <label>Section Image (Optional)</label>
                 <input type="file" name="section_image[]">
             `;
             container.appendChild(div);
+            // Scroll to the new section smoothly
+            div.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     </script>
 </body>
