@@ -40,18 +40,18 @@ if (isset($_GET['slug'])) {
     <link rel="stylesheet" href="style.css"> <style>
         /* --- Blog Detail Specific Styles --- */
         .blog-detail-page {
-            background-color: #f9f9f9;
-            padding: 40px 0;
-            min-height: 80vh;
+            background-color: #f4f7f6;
+            padding: 60px 0;
+            min-height: 100vh;
         }
 
         .blog-content-wrapper {
-            max-width: 900px;
+            max-width: 850px;
             margin: 0 auto;
             background: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
         }
 
         /* Back Button */
@@ -59,93 +59,103 @@ if (isset($_GET['slug'])) {
             display: inline-flex;
             align-items: center;
             text-decoration: none;
-            color: #555;
-            font-weight: 600;
-            margin-bottom: 25px;
-            transition: 0.3s;
-            background: #f0f0f0;
-            padding: 8px 16px;
-            border-radius: 30px;
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 35px;
+            transition: all 0.3s ease;
+            background: #fff;
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid #eee;
+            font-size: 0.95rem;
         }
         .back-btn:hover {
-            background: #ff6600;
+            background: #ff5532;
             color: #fff;
+            border-color: #ff5532;
             transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(255, 85, 50, 0.2);
         }
-        .back-btn svg { margin-right: 8px; }
+        .back-btn svg { margin-right: 10px; }
 
         /* Blog Header */
+        .article-header {
+            margin-bottom: 30px;
+        }
         .article-header h1 {
-            font-size: 2.5rem;
-            color: #222;
-            margin-bottom: 15px;
-            line-height: 1.3;
+            font-size: 2.8rem;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-weight: 800;
+            letter-spacing: -0.5px;
         }
         .article-meta {
-            color: #777;
-            font-size: 0.95rem;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #f0f0f0;
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 20px;
         }
         .article-meta span { display: inline-flex; align-items: center; }
-        .article-meta svg { width: 16px; height: 16px; margin-right: 5px; }
+        .article-meta svg { width: 16px; height: 16px; margin-right: 8px; color: #ff5532; }
 
         /* Images */
         .main-featured-image {
             width: 100%;
             height: auto;
-            max-height: 500px;
+            max-height: 550px;
             object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .section-image {
-            width: 100%;
-            border-radius: 8px;
-            margin-top: 20px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
         }
 
         /* Content Typography */
         .article-body {
-            font-size: 1.1rem;
-            line-height: 1.8;
+            font-size: 1.15rem;
+            line-height: 1.9;
             color: #333;
+            text-align: justify;
+            text-justify: inter-word;
         }
-        .article-body p { margin-bottom: 20px; }
+        .article-body p { margin-bottom: 25px; }
         
         /* Dynamic Sections */
         .content-block {
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 1px dashed #eee;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #f0f0f0;
         }
         .content-block h2 {
-            color: #222;
-            font-size: 2rem;
-            margin-bottom: 20px;
+            color: #1a1a1a;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
             font-weight: 700;
+            line-height: 1.3;
         }
         .section-image-wrapper {
-            margin: 25px 0;
+            margin: 35px 0;
             text-align: center;
         }
         .section-image {
             width: 100%;
-            max-height: 450px;
+            max-height: 500px;
             object-fit: cover;
             border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .blog-content-wrapper { padding: 20px; }
-            .article-header h1 { font-size: 1.8rem; }
+            .blog-detail-page { padding: 30px 0; }
+            .blog-content-wrapper { padding: 30px 20px; border-radius: 0; }
+            .article-header h1 { font-size: 2rem; }
+            .article-body { text-align: left; font-size: 1.05rem; }
+            .content-block h2 { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -401,7 +411,7 @@ if (isset($_GET['slug'])) {
                     <?php endif; ?>
 
                     <div class="article-body">
-                        <?php echo nl2br($blog['main_content']); ?>
+                        <?php echo nl2br(trim($blog['main_content'])); ?>
                     </div>
 
                     <?php while($sec = $sections->fetch_assoc()): ?>
@@ -416,9 +426,9 @@ if (isset($_GET['slug'])) {
                                 </div>
                             <?php endif; ?>
 
-                            <?php if (!empty($sec['section_content'])): ?>
+                            <?php if (!empty(trim($sec['section_content']))): ?>
                                 <div class="article-body">
-                                    <?php echo nl2br(htmlspecialchars($sec['section_content'])); ?>
+                                    <?php echo nl2br(htmlspecialchars(trim($sec['section_content']))); ?>
                                 </div>
                             <?php endif; ?>
                         </div>

@@ -95,8 +95,7 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
 
         .gallery-item {
             position: relative;
-            border-radius: 24px;
-            overflow: hidden;
+             overflow: hidden;
             background: #fff;
             aspect-ratio: 1/1;
             cursor: pointer;
