@@ -57,8 +57,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['gallery_image'])) {
             
             if (move_uploaded_file($_FILES['gallery_image']['tmp_name'][$i], $target_file)) {
                 $image_path = "uploads/gallery/" . $image_name;
-                $conn->query("INSERT INTO gallery (image_path, category) VALUES ('$image_path', '$category')");
-                $success_count++;
+                
+                // Double Check for Duplicates
+                $check = $conn->query("SELECT id FROM gallery WHERE image_path = '$image_path'");
+                if ($check->num_rows == 0) {
+                    $conn->query("INSERT INTO gallery (image_path, category) VALUES ('$image_path', '$category')");
+                    $success_count++;
+                }
             }
         }
     }

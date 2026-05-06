@@ -238,7 +238,7 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
 
             <!-- LOGO -->
             <div class="brand-logo">
-                <a href="index.html">
+                <a href="index.php">
                     <img src="./images/logo.png">
                 </a>
             </div>
@@ -259,46 +259,46 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
                             <!-- COL 1 -->
                             <div class="mega-col">
                                 <h4>Design & Multimedia Courses</h4>
-                                <a href="foundation-graphic.html">Graphic Designing</a>
-                                <a href="web-designing.html">Web Designing</a>
-                                <a href="ui&ux.html">UI & UX Design</a>
-                                <a href="animation.html">2D/3D Animation</a>
-                                <a href="motion-graphics.html">Motion Graphics</a>
-                                <a href="graphic-and-web-designing.html">Graphics & Web Designing</a>
-                                <a href="digital-content-creator.html">Digital Content Creator</a>
-                                <a href="autocad.html">Auto CAD</a>
+                                <a href="foundation-graphic.php">Graphic Designing</a>
+                                <a href="web-designing.php">Web Designing</a>
+                                <a href="ui&ux.php">UI & UX Design</a>
+                                <a href="animation.php">2D/3D Animation</a>
+                                <a href="motion-graphics.php">Motion Graphics</a>
+                                <a href="graphic-and-web-designing.php">Graphics & Web Designing</a>
+                                <a href="digital-content-creator.php">Digital Content Creator</a>
+                                <a href="autocad.php">Auto CAD</a>
                             </div>
 
                             <!-- COL 2 -->
                             <div class="mega-col">
                                 <h4>CMS & Web Technologies Courses</h4>
-                                <a href="web-development.html">Web Development</a>
-                                <a href="fullstack-web-development.html">Full Stack Development</a>
-                                <a href="mern-stack.html">MERN Stack</a>
-                                <a href="mean-stack.html">MEAN Stack</a>
-                                <a href="php-training.html">PHP Training</a>
-                                <a href="wordpress.html">WordPress</a>
+                                <a href="web-development.php">Web Development</a>
+                                <a href="fullstack-web-development.php">Full Stack Development</a>
+                                <a href="mern-stack.php">MERN Stack</a>
+                                <a href="mean-stack.php">MEAN Stack</a>
+                                <a href="php-training.php">PHP Training</a>
+                                <a href="wordpress.php">WordPress</a>
 
                                 <h4>Digital Marketing Courses</h4>
-                                <a href="digital-marketing.html">Digital Marketing</a>
-                                <a href="social-media-marketing.html">Social Media Marketing</a>
-                                <a href="seo-course.html">SEO Course</a>
+                                <a href="digital-marketing.php">Digital Marketing</a>
+                                <a href="social-media-marketing.php">Social Media Marketing</a>
+                                <a href="seo-course.php">SEO Course</a>
                             </div>
 
                             <!-- COL 3 -->
                             <div class="mega-col">
                                 <h4>Professional Training Courses</h4>
-                                <a href="business-analytics.html">Data Science & Business Analytics</a>
-                                <a href="machine-learning.html">Data Science & Machine Learning</a>
-                                <a href="data-analytics.html">Data Analytics</a>
-                                <a href="cyber-security.html">Complete Cyber Security Course</a>
-                                <a href="ethical-hacking.html">Ethical Hacking</a>
-                                <a href="software-engineering.html">Software Engineering With Python</a>
+                                <a href="business-analytics.php">Data Science & Business Analytics</a>
+                                <a href="machine-learning.php">Data Science & Machine Learning</a>
+                                <a href="data-analytics.php">Data Analytics</a>
+                                <a href="cyber-security.php">Complete Cyber Security Course</a>
+                                <a href="ethical-hacking.php">Ethical Hacking</a>
+                                <a href="software-engineering.php">Software Engineering With Python</a>
 
                                 <h4>Additional Courses</h4>
-                                <a href="system-design.html">System Design & Operating Systems</a>
-                                <a href="data-structures.html">Algorithm & Data Structures In Python</a>
-                                <a href="devops-course.html">DevOps Course</a>
+                                <a href="system-design.php">System Design & Operating Systems</a>
+                                <a href="data-structures.php">Algorithm & Data Structures In Python</a>
+                                <a href="devops-course.php">DevOps Course</a>
 
                             </div>
 
@@ -321,21 +321,21 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
                         <div class="mega-grid small-grid">
 
                             <div class="mega-col">
-                                <a href="web&app-online.html">Full Stack & Apps</a>
-                                <a href="digital-marketing-online.html">Digital Marketing</a>
-                                <a href="data-science-online.html">Data Science</a>
+                                <a href="web&app-online.php">Full Stack & Apps</a>
+                                <a href="digital-marketing-online.php">Digital Marketing</a>
+                                <a href="data-science-online.php">Data Science</a>
                             </div>
 
                             <div class="mega-col">
-                                <a href="data-analytics-online.html">Data Analytics</a>
-                                <a href="Ethical-hacking-online.html">Ethical Hacking</a>
+                                <a href="data-analytics-online.php">Data Analytics</a>
+                                <a href="Ethical-hacking-online.php">Ethical Hacking</a>
                             </div>
 
                         </div>
                     </div>
                 </div>
 
-                <a href="services.html" class="menu-link">Services</a>
+                <a href="services.php" class="menu-link">Services</a>
             </div>
 
             <!-- RIGHT -->
@@ -343,7 +343,7 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
                 <div class="menu-toggle" id="openMenu">
                     <span></span><span></span><span></span>
                 </div>
-                <a href="contact.html" class="color-btn">Contact</a>
+                <a href="contact.php" class="color-btn">Contact</a>
             </div>
 
         </nav>
@@ -355,8 +355,8 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
 
         <div class="side-links">
 
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
+            <a href="index.php">Home</a>
+            <a href="about.php">About</a>
 
             <div class="side-item course-campus">
                 <div class="menu-link">
@@ -370,50 +370,50 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
                     <!-- COL 1 -->
                     <div class="side-col">
                         <h4>Design & Multimedia</h4>
-                        <a href="foundation-graphic.html">Graphic Designing</a>
-                        <a href="web-designing.html">Web Designing</a>
-                        <a href="ui&ux.html">UI & UX Design</a>
-                        <a href="animation.html">2D/3D Animation</a>
-                        <a href="motion-graphics.html">Motion Graphics</a>
-                        <a href="graphic-and-web-designing.html">Graphics & Web Designing</a>
-                        <a href="digital-content-creator.html">Digital Content Creator</a>
-                        <a href="autocad.html">Auto Cad</a>
+                        <a href="foundation-graphic.php">Graphic Designing</a>
+                        <a href="web-designing.php">Web Designing</a>
+                        <a href="ui&ux.php">UI & UX Design</a>
+                        <a href="animation.php">2D/3D Animation</a>
+                        <a href="motion-graphics.php">Motion Graphics</a>
+                        <a href="graphic-and-web-designing.php">Graphics & Web Designing</a>
+                        <a href="digital-content-creator.php">Digital Content Creator</a>
+                        <a href="autocad.php">Auto Cad</a>
                     </div>
 
                     <!-- COL 2 -->
                     <div class="mega-col">
                         <h4>CMS & Web Tech</h4>
-                        <a href="web-development.html">Web Development</a>
-                        <a href="fullstack-web-development.html">Full Stack Development</a>
-                        <a href="mern-stack.html">MERN Stack</a>
-                        <a href="mean-stack.html">MEAN Stack</a>
-                        <a href="php-training.html">PHP Training</a>
-                        <a href="wordpress.html">WordPress</a>
+                        <a href="web-development.php">Web Development</a>
+                        <a href="fullstack-web-development.php">Full Stack Development</a>
+                        <a href="mern-stack.php">MERN Stack</a>
+                        <a href="mean-stack.php">MEAN Stack</a>
+                        <a href="php-training.php">PHP Training</a>
+                        <a href="wordpress.php">WordPress</a>
                     </div>
 
                     <!-- COL 3 -->
                     <div class="mega-col">
                         <h4>Professional Courses</h4>
-                        <a href="business-analytics.html">Data Science & Business Analytics</a>
-                        <a href="machine-learning.html">Data Science & Machine Learning</a>
-                                <a href="data-analytics.html">Data Analytics</a>
-                        <a href="cyber-security.html">Complete Cyber Security Course</a>
-                        <a href="ethical-hacking.html">Ethical Hacking</a>
-                        <a href="software-engineering.html">Software Engineering With Python</a>
+                        <a href="business-analytics.php">Data Science & Business Analytics</a>
+                        <a href="machine-learning.php">Data Science & Machine Learning</a>
+                                <a href="data-analytics.php">Data Analytics</a>
+                        <a href="cyber-security.php">Complete Cyber Security Course</a>
+                        <a href="ethical-hacking.php">Ethical Hacking</a>
+                        <a href="software-engineering.php">Software Engineering With Python</a>
                     </div>
 
                     <!-- COL 4 -->
                     <div class="mega-col">
                         <h4 class="bottomh4">Additional Courses</h4>
-                        <a href="system-design.html">System Design & Operating Systems</a>
-                        <a href="data-structures.html">Algorithm & Data Structures In Python</a>
-                        <a href="devops-course.html">DevOps Course</a>
+                        <a href="system-design.php">System Design & Operating Systems</a>
+                        <a href="data-structures.php">Algorithm & Data Structures In Python</a>
+                        <a href="devops-course.php">DevOps Course</a>
 
 
                         <h4 class="mt">Digital Marketing</h4>
-                        <a href="digital-marketing.html">Digital Marketing</a>
-                        <a href="social-media-marketing.html">Social Media Marketing</a>
-                        <a href="seo-course.html">SEO Course</a>
+                        <a href="digital-marketing.php">Digital Marketing</a>
+                        <a href="social-media-marketing.php">Social Media Marketing</a>
+                        <a href="seo-course.php">SEO Course</a>
                     </div>
 
                 </div>
@@ -424,20 +424,20 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
                     Online Courses<span class="icon-arrow"></span></div>
                 <div class="side-dropdown">
 
-                      <a href="web&app-online.html">Full Stack & Apps</a>
-                    <a href="digital-marketing-online.html">Digital Marketing</a>
-                    <a href="data-science-online.html">Data Science</a>
-                    <a href="data-analytics-online.html">Data Analytics</a>
-                    <a href="Ethical-hacking-online.html">Ethical Hacking</a>
+                      <a href="web&app-online.php">Full Stack & Apps</a>
+                    <a href="digital-marketing-online.php">Digital Marketing</a>
+                    <a href="data-science-online.php">Data Science</a>
+                    <a href="data-analytics-online.php">Data Analytics</a>
+                    <a href="Ethical-hacking-online.php">Ethical Hacking</a>
                 </div>
             </div>
-            <a href="industrial-training.html">Industrial Training</a>
+            <a href="industrial-training.php">Industrial Training</a>
 
             <a href="gallery.php">Gallery</a>
             <a href="blog.php">Blog</a>
-            <a href="career.html">Career</a>
+            <a href="career.php">Career</a>
 
-            <a href="contact.html">Contact</a>
+            <a href="contact.php">Contact</a>
 
         </div>
     </div>
@@ -570,23 +570,23 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
                     <li>
                         <h5>Quick Links</h5>
                     </li>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.php">Home</a></li>
                     <li><a href="gallery.php">Gallery</a></li>
-                    <li><a href="career.html">Carrer</a></li>
-                    <li><a href="privacy-policy.html">Privacy & Policy</a></li>
+                    <li><a href="career.php">Carrer</a></li>
+                    <li><a href="privacy-policy.php">Privacy & Policy</a></li>
                 </ul>
                 <!--  -->
                 <ul>
                     <li>
                         <h5>Top Courses</h5>
                     </li>
-                    <li><a href="fullstack-web-development.html">Full Stack
+                    <li><a href="fullstack-web-development.php">Full Stack
                             Development</a></li>
-                    <li><a href="graphic-and-web-designing.html">Graphics &
+                    <li><a href="graphic-and-web-designing.php">Graphics &
                             Web Designing</a></li>
-                    <li><a href="mern-stack.html">MERN Stack</a></li>
-                    <li><a href="mean-stack.html">MEAN Stack</a></li>
-                    <li><a href="software-engineering.html">Python
+                    <li><a href="mern-stack.php">MERN Stack</a></li>
+                    <li><a href="mean-stack.php">MEAN Stack</a></li>
+                    <li><a href="software-engineering.php">Python
                             Course</a></li>
                 </ul>
                 <!--  -->
@@ -594,13 +594,13 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
                     <li>
                         <h5>Features</h5>
                     </li>
-                    <li><a href="foundation-graphic.html">Graphic
+                    <li><a href="foundation-graphic.php">Graphic
                             Designing</a></li>
-                    <li><a href="animation.html">Animation</a></li>
-                    <li><a href="ui&ux.html">UI & UX Design</a></li>
-                    <li><a href="digital-marketing.html">Digital
+                    <li><a href="animation.php">Animation</a></li>
+                    <li><a href="ui&ux.php">UI & UX Design</a></li>
+                    <li><a href="digital-marketing.php">Digital
                             Marketing</a></li>
-                    <li><a href="digital-content-creator.html">Content
+                    <li><a href="digital-content-creator.php">Content
                             Creation</a></li>
                 </ul>
                 <!--  -->
@@ -609,15 +609,15 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
                     <li>
                         <h5>Professional Training</h5>
                     </li>
-                    <li><a href="machine-learning.html">Data Science &
+                    <li><a href="machine-learning.php">Data Science &
                             Machine Learning</a></li>
-                    <li><a href="business-analytics.html">Data Science &
+                    <li><a href="business-analytics.php">Data Science &
                             Business Analytics</a></li>
-                    <li><a href="system-design.html">System Design &
+                    <li><a href="system-design.php">System Design &
                             Operating System</a></li>
-                    <li><a href="cyber-security.html">Cyber
+                    <li><a href="cyber-security.php">Cyber
                             Security</a></li>
-                    <li><a href="ethical-hacking.html">Ethical
+                    <li><a href="ethical-hacking.php">Ethical
                             Hacking</a></li>
                 </ul>
                 <!--  -->
@@ -627,7 +627,7 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
         </div>
         <div class="copyright">
             <div class="container">
-                <p>Copyright &copy;2026 All rights reserved by &hearts; <a href="index.html">Netcoder Technology</a></p>
+                <p>Copyright &copy;2026 All rights reserved by &hearts; <a href="index.php">Netcoder Technology</a></p>
                 <div class="social-icons">
                     <a href="https://www.facebook.com/netcodertechnology/">
                         <svg width="20" height="20" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">

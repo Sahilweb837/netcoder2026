@@ -1,143 +1,22 @@
- <?php
-require_once 'config.php';
-
-// 1. Get the slug from the URL
-if (isset($_GET['slug'])) {
-    $slug = $conn->real_escape_string($_GET['slug']);
-
-    // 2. Fetch Main Blog Post
-    $sql = "SELECT * FROM blogs WHERE slug = '$slug'";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        $blog = $result->fetch_assoc();
-        $blog_id = $blog['id'];
-
-        // 3. Fetch Additional Content Sections
-        $section_sql = "SELECT * FROM blog_sections WHERE blog_id = $blog_id";
-        $sections = $conn->query($section_sql);
-    } else {
-        // Redirect to blog list if slug not found
-        header("Location: blog.php");
-        exit();
-    }
-} else {
-    header("Location: blog.php");
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($blog['title']); ?> | Netcoder Technology</title>
-    <meta name="description" content="<?php echo htmlspecialchars($blog['excerpt']); ?>">
-     <!-- font awesomme linked her -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="keywords"content="typography in branding, effective typography, typography for social media, branding tips Dharamshala, social media graphics tips, font design branding, typography trends, Netcoder Technology blog, typography for marketing, Himachal Pradesh branding education    ">
+<meta name="description"content="Learn how to use typography effectively in branding and social media graphics. Explore strategies to make impactful designs in Dharamshala  with Netcoder Technology.">
+    <title>How Can Typography Be Used Effectively In Branding And Social Media Graphics? | Netcoder Technology</title>
+    <!-- favicon -->
     <link rel="shortcut icon" href="images/net-coder-logo icon.png">
-    <link rel="stylesheet" href="style.css"> <style>
-        /* --- Blog Detail Specific Styles --- */
-        .blog-detail-page {
-            background-color: #f9f9f9;
-            padding: 40px 0;
-            min-height: 80vh;
-        }
-
-        .blog-content-wrapper {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-
-        /* Back Button */
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            text-decoration: none;
-            color: #555;
-            font-weight: 600;
-            margin-bottom: 25px;
-            transition: 0.3s;
-            background: #f0f0f0;
-            padding: 8px 16px;
-            border-radius: 30px;
-        }
-        .back-btn:hover {
-            background: #ff6600;
-            color: #fff;
-            transform: translateX(-5px);
-        }
-        .back-btn svg { margin-right: 8px; }
-
-        /* Blog Header */
-        .article-header h1 {
-            font-size: 2.5rem;
-            color: #222;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-        .article-meta {
-            color: #777;
-            font-size: 0.95rem;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .article-meta span { display: inline-flex; align-items: center; }
-        .article-meta svg { width: 16px; height: 16px; margin-right: 5px; }
-
-        /* Images */
-        .main-featured-image {
-            width: 100%;
-            height: auto;
-            max-height: 500px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .section-image {
-            width: 100%;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-
-        /* Content Typography */
-        .article-body {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #333;
-        }
-        .article-body p { margin-bottom: 20px; }
-        
-        /* Dynamic Sections */
-        .content-block {
-            margin-top: 40px;
-            padding-top: 20px;
-        }
-        .content-block h2 {
-            color: #ff6600;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .blog-content-wrapper { padding: 20px; }
-            .article-header h1 { font-size: 1.8rem; }
-        }
-    </style>
+    <!-- css -->
+    <link rel="stylesheet" href="style.css">
+<!-- font awesomme linked her -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
-    <header class="main-header">
+  <header class="main-header">
         <nav class="main-nav">
 
             <!-- LOGO -->
@@ -195,7 +74,6 @@ if (isset($_GET['slug'])) {
                                 <a href="business-analytics.php">Data Science & Business Analytics</a>
                                 <a href="machine-learning.php">Data Science & Machine Learning</a>
                                 <a href="data-analytics.php">Data Analytics</a>
-
                                 <a href="cyber-security.php">Complete Cyber Security Course</a>
                                 <a href="ethical-hacking.php">Ethical Hacking</a>
                                 <a href="software-engineering.php">Software Engineering With Python</a>
@@ -253,6 +131,7 @@ if (isset($_GET['slug'])) {
 
         </nav>
     </header>
+
     <!-- side menu -->
     <div class="side-menu" id="mobileMenu">
 
@@ -301,7 +180,7 @@ if (isset($_GET['slug'])) {
                         <h4>Professional Courses</h4>
                         <a href="business-analytics.php">Data Science & Business Analytics</a>
                         <a href="machine-learning.php">Data Science & Machine Learning</a>
-                                <a href="data-analytics.php">Data Analytics</a>
+                        <a href="data-analytics.php">Data Analytics</a>
 
                         <a href="cyber-security.php">Complete Cyber Security Course</a>
                         <a href="ethical-hacking.php">Ethical Hacking</a>
@@ -330,7 +209,7 @@ if (isset($_GET['slug'])) {
                     Online Courses<span class="icon-arrow"></span></div>
                 <div class="side-dropdown">
 
-                      <a href="web&app-online.php">Full Stack & Apps</a>
+                    <a href="web&app-online.php">Full Stack & Apps</a>
                     <a href="digital-marketing-online.php">Digital Marketing</a>
                     <a href="data-science-online.php">Data Science</a>
                     <a href="data-analytics-online.php">Data Analytics</a>
@@ -347,74 +226,129 @@ if (isset($_GET['slug'])) {
 
         </div>
     </div>
-
-
-    <div class="blog-detail-page">
-        <div class="container">
-            <div class="blog-content-wrapper">
-                
-                <a href="blog.php" class="back-btn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="19" y1="12" x2="5" y2="12"></line>
-                        <polyline points="12 19 5 12 12 5"></polyline>
+    <main class="container">
+        <div class="blog-nav">
+            <ul>
+                <li>
+                    <a href="index.php"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9 21V13.6C9 13.0399 9 12.7599 9.109 12.546C9.20487 12.3578 9.35785 12.2049 9.54601 12.109C9.75993 12 10.04 12 10.6 12H13.4C13.9601 12 14.2401 12 14.454 12.109C14.6422 12.2049 14.7951 12.3578 14.891 12.546C15 12.7599 15 13.0399 15 13.6V21M2 9.5L11.04 2.72C11.3843 2.46181 11.5564 2.33271 11.7454 2.28294C11.9123 2.23902 12.0877 2.23902 12.2546 2.28295C12.4436 2.33271 12.6157 2.46181 12.96 2.72L22 9.5M4 8V17.8C4 18.9201 4 19.4802 4.21799 19.908C4.40974 20.2843 4.7157 20.5903 5.09202 20.782C5.51985 21 6.0799 21 7.2 21H16.8C17.9201 21 18.4802 21 18.908 20.782C19.2843 20.5903 19.5903 20.2843 19.782 19.908C20 19.4802 20 18.9201 20 17.8V8L13.92 3.44C13.2315 2.92361 12.8872 2.66542 12.5091 2.56589C12.1754 2.47804 11.8246 2.47804 11.4909 2.56589C11.1128 2.66542 10.7685 2.92361 10.08 3.44L4 8Z"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg></a>
+                </li>
+                <li>
+                    <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 17L11 12L6 7M13 17L18 12L13 7" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
                     </svg>
-                    Back to All Blogs
-                </a>
-
-                <article>
-                    <header class="article-header">
-                        <h1><?php echo htmlspecialchars($blog['title']); ?></h1>
-                        
-                        <div class="article-meta">
-                            <span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                <?php echo htmlspecialchars($blog['author']); ?>
-                            </span>
-                            <span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                                <?php echo date('F d, Y', strtotime($blog['date_posted'])); ?>
-                            </span>
-                            <?php if(!empty($blog['tags'])): ?>
-                            <span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-                                <?php echo htmlspecialchars($blog['tags']); ?>
-                            </span>
-                            <?php endif; ?>
-                        </div>
-                    </header>
-
-                    <?php if (!empty($blog['main_image'])): ?>
-                        <img src="<?php echo htmlspecialchars($blog['main_image']); ?>" alt="<?php echo htmlspecialchars($blog['title']); ?>" class="main-featured-image">
-                    <?php endif; ?>
-
-                    <div class="article-body">
-                        <?php echo nl2br($blog['main_content']); ?>
-                    </div>
-
-                    <?php while($sec = $sections->fetch_assoc()): ?>
-                        <div class="content-block">
-                            <?php if (!empty($sec['section_title'])): ?>
-                                <h2><?php echo htmlspecialchars($sec['section_title']); ?></h2>
-                            <?php endif; ?>
-
-                            <?php if (!empty($sec['section_content'])): ?>
-                                <div class="article-body">
-                                    <?php echo nl2br($sec['section_content']); ?>
-                                </div>
-                            <?php endif; ?>
-
-                            <?php if (!empty($sec['section_image'])): ?>
-                                <img src="<?php echo htmlspecialchars($sec['section_image']); ?>" alt="Section visual" class="section-image">
-                            <?php endif; ?>
-                        </div>
-                    <?php endwhile; ?>
-
-                </article>
-            </div>
+                </li>
+                <li>
+                    <a href="blog.php">BLOGS</a>
+                </li>
+                <li>
+                    <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 17L11 12L6 7M13 17L18 12L13 7" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </li>
+                <li><a href="#">How Can Typography Be Used Effectively In Branding And Social Media Graphics?</a></li>
+            </ul>
         </div>
-    </div>
+        <div class="main-blog">
+            <div class="head">
+                <h2>How Can Typography Be Used Effectively In Branding And Social Media Graphics?</h2>
+                <p>In branding and social media graphics, typography is essential because it is an effective instrument
+                    for expressing ideas, evoking feelings, and forging a distinctive brand identity. Whether you're
+                    making commercials, social media postings, or logos, using typography well may greatly increase the
+                    impact and engagement of your brand. </p>
+            </div>
+            <!--  -->
+            <!--  -->
+            <div class="blog-img">
+                <img src="images/typography.png" alt="">
+            </div>
+            <!--  -->
+            <div class="blog-info">
+                <div>
+                    <h3>Introduction: The Power of Typography</h3>
+                    <p>
+                        Imagine you're walking through a bustling city, surrounded by billboards and store signs. Some
+                        catch your eye immediately, while others fade into the background. One café sign, with its
+                        elegant handwritten font, stops you in your tracks. It feels cozy, welcoming, and somehow…
+                        familiar. You decide to walk in, all because the typography spoke to you before the words did.
+                        <br>
+                        This simple experience highlights how typography, when used effectively, can shape perceptions
+                        and drive engagement—whether in branding or social media.
+                    </p>
+                </div>
+                <!--  -->
+                <div>
+                    <h3>Why Typography Matters in Branding</h3>
+                        <p>Typography goes beyond just choosing a pretty font. It communicates the essence of your brand.
+                        Here's why it’s critical:</p>
 
-     <!-- footer -->
+                        <p><b>Creates a Visual Identity:</b> The right font style can reflect your brand's personality—bold and
+                        modern for tech companies, or soft and playful for a children's brand.
+                        </p>
+
+                        <p><b>Builds Brand Recognition:</b> When fonts are used consistently across all platforms, they become
+                        synonymous with your brand, making it instantly recognizable.
+                        </p>
+
+                       <p><b>Establishes Trust:</b> Consistent, professional typography can lend credibility to your brand.
+                        People tend to trust designs that feel thoughtful and cohesive.</p>
+                </div>
+                <!--  -->
+                <div class="blog-insight">
+                    <p><b>Insight:</b> Think of Nike. Their bold, straightforward typeface mirrors the brand’s no-nonsense, high-performance image. Every time you see that simple font paired with the swoosh, you know exactly what the brand stands for.</p>
+                </div>
+            <!--  -->
+                <div>
+                    <h3>Typography in Social Media Graphics</h3>
+                        <p>In the fast-paced world of social media, you have mere seconds to capture attention. Typography plays a key role in stopping the scroll. Here's how you can use it effectively:</p>
+
+                        <p><b>Readability is Key:</b> On platforms like Instagram or Twitter, posts need to be easy to read at a glance. Simple, clean fonts help deliver your message clearly and quickly.
+                        </p>
+
+                        <p><b>Fonts Reflect the Message:</b> Use different font sizes and weights to create visual interest and guide the viewer’s eye from the most important information to supporting details.
+                        </p>
+
+                       <p><b>Hierarchy in Design:</b> Consistent, professional typography can lend credibility to your brand.
+                        People tend to trust designs that feel thoughtful and cohesive.</p>
+                </div>
+                <!--  -->
+                <div class="blog-insight">
+                    <p><b>Insight:</b> Take a look at a fitness influencer’s Instagram post promoting a new workout plan. The bold, energetic typeface mirrors the high-energy message, grabbing attention and motivating viewers to take action.</p>
+                </div>
+                <!--  -->
+                <div>
+                    <h3>Choosing the Right Typography for Your Brand</h3>
+                        <p>When selecting fonts for branding and social media graphics, consider these key factors:</p>
+
+                        <p><b>Know Your Audience:</b> What resonates with your target demographic? A modern, minimalist typeface may appeal to a younger crowd, while a classic serif font might be more effective for traditional audiences.
+                        </p>
+
+                        <p><b>Think About Versatility:</b> Your typography should work across all platforms—whether on a website, social media, or print.
+                        </p>
+
+                       <p><b>Stick to a Limited Font Palette:</b> Too many fonts can make your brand look unorganized. Stick to 2–3 fonts that work well together to maintain consistency.</p>
+                </div>
+                <!--  -->
+                <div class="blog-insight">
+                    <p><b>Insight:</b> Consider Starbucks’ branding. Their typography is consistent across all mediums, whether it’s their in-store signage or their Instagram stories. The combination of modern and clean fonts creates a sense of reliability and quality.</p>
+                </div>
+                <!--  -->
+                <div>
+                    <h3>
+                        Conclusion:
+                    </h3>
+                    <p>At the end of the day, typography is more than just letters on a page or screen. It’s an essential component of your brand’s story. Whether you’re building a logo, creating social media posts, or designing a website, the right typography can amplify your message and leave a lasting impact on your audience.</p>
+                </div>
+            </div>
+    </main>
+
+    <!-- footer -->
     <footer>
         <div class="container">
             <div class="newsletter">
@@ -522,7 +456,7 @@ if (isset($_GET['slug'])) {
             </div>
         </div>
     </footer>
-    
     <script src="main.js"></script>
 </body>
+
 </html>

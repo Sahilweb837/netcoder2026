@@ -1,143 +1,22 @@
- <?php
-require_once 'config.php';
-
-// 1. Get the slug from the URL
-if (isset($_GET['slug'])) {
-    $slug = $conn->real_escape_string($_GET['slug']);
-
-    // 2. Fetch Main Blog Post
-    $sql = "SELECT * FROM blogs WHERE slug = '$slug'";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        $blog = $result->fetch_assoc();
-        $blog_id = $blog['id'];
-
-        // 3. Fetch Additional Content Sections
-        $section_sql = "SELECT * FROM blog_sections WHERE blog_id = $blog_id";
-        $sections = $conn->query($section_sql);
-    } else {
-        // Redirect to blog list if slug not found
-        header("Location: blog.php");
-        exit();
-    }
-} else {
-    header("Location: blog.php");
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($blog['title']); ?> | Netcoder Technology</title>
-    <meta name="description" content="<?php echo htmlspecialchars($blog['excerpt']); ?>">
-     <!-- font awesomme linked her -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="keywords"content="AI in web development, artificial intelligence web development, AI trends Dharamshala, future of web development, AI and websites, machine learning web development, AI-powered web design, AI in coding, Netcoder Technology blog, Himachal Pradesh tech education">
+<meta name="description"content="Discover how AI is revolutionizing web development. Explore trends in AI-powered design and coding for the future in Dharamshala  with Netcoder Technology.">
+    <title>How is Artificial Intelligence (AI) shaping the future of web development? | Netcoder Technology</title>
+    <!-- favicon -->
     <link rel="shortcut icon" href="images/net-coder-logo icon.png">
-    <link rel="stylesheet" href="style.css"> <style>
-        /* --- Blog Detail Specific Styles --- */
-        .blog-detail-page {
-            background-color: #f9f9f9;
-            padding: 40px 0;
-            min-height: 80vh;
-        }
-
-        .blog-content-wrapper {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-
-        /* Back Button */
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            text-decoration: none;
-            color: #555;
-            font-weight: 600;
-            margin-bottom: 25px;
-            transition: 0.3s;
-            background: #f0f0f0;
-            padding: 8px 16px;
-            border-radius: 30px;
-        }
-        .back-btn:hover {
-            background: #ff6600;
-            color: #fff;
-            transform: translateX(-5px);
-        }
-        .back-btn svg { margin-right: 8px; }
-
-        /* Blog Header */
-        .article-header h1 {
-            font-size: 2.5rem;
-            color: #222;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-        .article-meta {
-            color: #777;
-            font-size: 0.95rem;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .article-meta span { display: inline-flex; align-items: center; }
-        .article-meta svg { width: 16px; height: 16px; margin-right: 5px; }
-
-        /* Images */
-        .main-featured-image {
-            width: 100%;
-            height: auto;
-            max-height: 500px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .section-image {
-            width: 100%;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-
-        /* Content Typography */
-        .article-body {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #333;
-        }
-        .article-body p { margin-bottom: 20px; }
-        
-        /* Dynamic Sections */
-        .content-block {
-            margin-top: 40px;
-            padding-top: 20px;
-        }
-        .content-block h2 {
-            color: #ff6600;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .blog-content-wrapper { padding: 20px; }
-            .article-header h1 { font-size: 1.8rem; }
-        }
-    </style>
+    <!-- css -->
+    <link rel="stylesheet" href="style.css">
+<!-- font awesomme linked her -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
-    <header class="main-header">
+ <header class="main-header">
         <nav class="main-nav">
 
             <!-- LOGO -->
@@ -195,7 +74,6 @@ if (isset($_GET['slug'])) {
                                 <a href="business-analytics.php">Data Science & Business Analytics</a>
                                 <a href="machine-learning.php">Data Science & Machine Learning</a>
                                 <a href="data-analytics.php">Data Analytics</a>
-
                                 <a href="cyber-security.php">Complete Cyber Security Course</a>
                                 <a href="ethical-hacking.php">Ethical Hacking</a>
                                 <a href="software-engineering.php">Software Engineering With Python</a>
@@ -253,6 +131,7 @@ if (isset($_GET['slug'])) {
 
         </nav>
     </header>
+
     <!-- side menu -->
     <div class="side-menu" id="mobileMenu">
 
@@ -301,7 +180,7 @@ if (isset($_GET['slug'])) {
                         <h4>Professional Courses</h4>
                         <a href="business-analytics.php">Data Science & Business Analytics</a>
                         <a href="machine-learning.php">Data Science & Machine Learning</a>
-                                <a href="data-analytics.php">Data Analytics</a>
+                        <a href="data-analytics.php">Data Analytics</a>
 
                         <a href="cyber-security.php">Complete Cyber Security Course</a>
                         <a href="ethical-hacking.php">Ethical Hacking</a>
@@ -330,7 +209,7 @@ if (isset($_GET['slug'])) {
                     Online Courses<span class="icon-arrow"></span></div>
                 <div class="side-dropdown">
 
-                      <a href="web&app-online.php">Full Stack & Apps</a>
+                    <a href="web&app-online.php">Full Stack & Apps</a>
                     <a href="digital-marketing-online.php">Digital Marketing</a>
                     <a href="data-science-online.php">Data Science</a>
                     <a href="data-analytics-online.php">Data Analytics</a>
@@ -347,74 +226,100 @@ if (isset($_GET['slug'])) {
 
         </div>
     </div>
-
-
-    <div class="blog-detail-page">
-        <div class="container">
-            <div class="blog-content-wrapper">
-                
-                <a href="blog.php" class="back-btn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="19" y1="12" x2="5" y2="12"></line>
-                        <polyline points="12 19 5 12 12 5"></polyline>
+    <main class="container">
+        <div class="blog-nav">
+            <ul>
+                <li>
+                    <a href="index.php"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9 21V13.6C9 13.0399 9 12.7599 9.109 12.546C9.20487 12.3578 9.35785 12.2049 9.54601 12.109C9.75993 12 10.04 12 10.6 12H13.4C13.9601 12 14.2401 12 14.454 12.109C14.6422 12.2049 14.7951 12.3578 14.891 12.546C15 12.7599 15 13.0399 15 13.6V21M2 9.5L11.04 2.72C11.3843 2.46181 11.5564 2.33271 11.7454 2.28294C11.9123 2.23902 12.0877 2.23902 12.2546 2.28295C12.4436 2.33271 12.6157 2.46181 12.96 2.72L22 9.5M4 8V17.8C4 18.9201 4 19.4802 4.21799 19.908C4.40974 20.2843 4.7157 20.5903 5.09202 20.782C5.51985 21 6.0799 21 7.2 21H16.8C17.9201 21 18.4802 21 18.908 20.782C19.2843 20.5903 19.5903 20.2843 19.782 19.908C20 19.4802 20 18.9201 20 17.8V8L13.92 3.44C13.2315 2.92361 12.8872 2.66542 12.5091 2.56589C12.1754 2.47804 11.8246 2.47804 11.4909 2.56589C11.1128 2.66542 10.7685 2.92361 10.08 3.44L4 8Z"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg></a>
+                </li>
+                <li>
+                    <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 17L11 12L6 7M13 17L18 12L13 7" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
                     </svg>
-                    Back to All Blogs
-                </a>
-
-                <article>
-                    <header class="article-header">
-                        <h1><?php echo htmlspecialchars($blog['title']); ?></h1>
-                        
-                        <div class="article-meta">
-                            <span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                <?php echo htmlspecialchars($blog['author']); ?>
-                            </span>
-                            <span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                                <?php echo date('F d, Y', strtotime($blog['date_posted'])); ?>
-                            </span>
-                            <?php if(!empty($blog['tags'])): ?>
-                            <span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-                                <?php echo htmlspecialchars($blog['tags']); ?>
-                            </span>
-                            <?php endif; ?>
-                        </div>
-                    </header>
-
-                    <?php if (!empty($blog['main_image'])): ?>
-                        <img src="<?php echo htmlspecialchars($blog['main_image']); ?>" alt="<?php echo htmlspecialchars($blog['title']); ?>" class="main-featured-image">
-                    <?php endif; ?>
-
-                    <div class="article-body">
-                        <?php echo nl2br($blog['main_content']); ?>
-                    </div>
-
-                    <?php while($sec = $sections->fetch_assoc()): ?>
-                        <div class="content-block">
-                            <?php if (!empty($sec['section_title'])): ?>
-                                <h2><?php echo htmlspecialchars($sec['section_title']); ?></h2>
-                            <?php endif; ?>
-
-                            <?php if (!empty($sec['section_content'])): ?>
-                                <div class="article-body">
-                                    <?php echo nl2br($sec['section_content']); ?>
-                                </div>
-                            <?php endif; ?>
-
-                            <?php if (!empty($sec['section_image'])): ?>
-                                <img src="<?php echo htmlspecialchars($sec['section_image']); ?>" alt="Section visual" class="section-image">
-                            <?php endif; ?>
-                        </div>
-                    <?php endwhile; ?>
-
-                </article>
-            </div>
+                </li>
+                <li>
+                    <a href="blog.php">BLOGS</a>
+                </li>
+                <li>
+                    <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 17L11 12L6 7M13 17L18 12L13 7" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </li>
+                <li><a href="#">How is Artificial Intelligence (AI) shaping the future of web development?</a></li>
+            </ul>
         </div>
-    </div>
+        <div class="main-blog">
+            <div class="head">
+                <h2>How is Artificial Intelligence (AI) shaping the future of web development?</h2>
+                <p>AI is rapidly transforming the web development landscape, bringing with it unprecedented possibilities. Whether you're a developer, designer, or business owner, now is the time to explore how AI can enhance your online presence and meet the growing demands of the digital world. </p>
+            </div>
+            <!--  -->
+            <!--  -->
+            <div class="blog-img">
+                <img src="images/web-dev-blog.jpg" alt="">
+            </div>
+            <!--  -->
+            <div class="blog-info">
+                <div>
+                    <h3>Introduction: A New Era of Web Development </h3>
+                    <p>
+                        Imagine visiting a website in the near future. As you browse, the site anticipates your needs, suggesting products or content you're interested in, adjusting its layout in real-time to suit your device, and even answering your questions via an intelligent chatbot. This seamless experience is made possible by Artificial Intelligence (AI), which is rapidly transforming how websites are built and managed.
+                    </p>
+                </div>
+                <!--  -->
+                <div>
+                    <h3>What is AI in Web Development?</h3>
+                        <p>Artificial Intelligence in web development involves integrating machine learning algorithms and intelligent systems to enhance the functionality and user experience of websites. It allows websites to be more dynamic, responsive, and personalized by leveraging data and automation.</p>
+                </div>
+                <!--  -->
+                <div>
+                    <h3>Key Areas Where AI is Impacting Web Development</h3>
+                        <p><b>Automated Code Generation:</b> AI tools like GitHub Copilot can now assist developers by auto-completing code, suggesting improvements, or even generating entire code blocks based on natural language descriptions. This not only speeds up development but also reduces errors and boosts productivity.
+                        </p>
 
-     <!-- footer -->
+                        <p><b>Enhanced User Experience (UX):</b> AI allows websites to personalize content in real-time. From product recommendations to dynamic page elements, AI adapts the site to each user's preferences and behaviors, providing a custom experience.
+                        </p>
+
+                       <p><b>Chatbots and Virtual Assistants:</b> AI-driven chatbots like ChatGPT can now handle customer inquiries, provide recommendations, and even troubleshoot issues 24/7. This enhances user engagement and reduces the need for constant human intervention.</p>
+                </div>
+                <!--  -->
+                <div>
+                    <h3>AI in Web Design: Making Designers&rsquo; Lives Easier</h3>
+                        <p>AI isn&rsquo;t just helping developers—it's revolutionizing web design, too:</p>
+
+                        <p><b>AI Design Tools: </b> Platforms like Wix ADI (Artificial Design Intelligence) can now build entire websites with minimal input. AI takes user preferences and content, then automatically designs a visually appealing and functional website.
+                        </p>
+
+                        <p><b>Image and Layout Optimization:</b> AI can analyze user interactions and optimize layouts, font sizes, and color schemes for better engagement. It ensures that websites look good across different devices and screen sizes.
+                </div>
+                <!--  -->
+                <div>
+                    <h3>AI and Web Security</h3>
+                        <p>Web security is a growing concern as cyberattacks become more sophisticated. AI is now at the forefront of protecting websites by:</p>
+
+                        <p><b>Detecting Security Threats: </b> AI systems can monitor unusual behavior on websites, flagging potential security risks before they become full-blown breaches.
+                        </p>
+
+                        <p><b>Automated Security Updates:</b> AI can automatically patch vulnerabilities and update security protocols without requiring manual intervention.
+                </div>
+                <!--  -->
+                <div>
+                    <h3>
+                        Conclusion: AI&rsquo;s Transformative Role in Web Development
+                    </h3>
+                    <p>Artificial Intelligence is not just a trend—it&rsquo;s shaping the future of web development in ways that will make websites smarter, faster, and more user-friendly. From automating coding processes to enhancing security and personalization, AI is becoming an indispensable tool for developers and designers alike..</p>
+                </div>
+            </div>
+    </main>
+
+    <!-- footer -->
     <footer>
         <div class="container">
             <div class="newsletter">
@@ -522,7 +427,7 @@ if (isset($_GET['slug'])) {
             </div>
         </div>
     </footer>
-    
     <script src="main.js"></script>
 </body>
+
 </html>

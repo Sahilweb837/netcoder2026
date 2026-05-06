@@ -1,133 +1,29 @@
- <?php
-// blog.php
-require_once 'config.php';
-
-// Fetch all blogs ordered by latest first
-$sql = "SELECT * FROM blogs ORDER BY date_posted DESC";
-$result = $conn->query($sql);
-$blogs = [];
-
-if ($result) {
-    $blogs = $result->fetch_all(MYSQLI_ASSOC);
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="Netcoder Technology blog, IT training insights, technology trends, programming tutorials, ethical hacking tips, digital marketing strategies, data science resources, web development articles, graphic design tips, career advice in IT, industry news, student success stories, online learning resources, technology skills development, internship guidance">
-    <meta name="description" content="Explore the Netcoder Technology blog for expert insights on IT training, industry trends, and helpful tips. Discover resources on programming, ethical hacking, digital marketing, and more to enhance your tech skills and career.">
-    <title>Netcoder Technology Blog | Insights on IT Training, Trends, and Tips</title>
-    <link rel="canonical" href="https://www.netcoder.in/blog/" />
-
-     <!-- font awesomme linked her -->
+    <meta name="description"
+        content="Discover Netcoder Technology, a premier IT training institute in Dharamshala. Learn about our mission to empower students with essential tech skills, expert instruction, and real-world experience for a successful career in IT.">
+    <title>Careers at Netcoder Technology | Job Opportunities in
+        Dharamshala</title>
+    <!-- canonical tag -->
+    <link rel="canonical" href="https://www.netcoder.in/career/" />
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- favicon -->
+    <link rel="shortcut icon" href="images/net-coder-logo icon.png">
+    <!-- css -->
+    <link rel="stylesheet" href="style.css">
+<!-- font awesomme linked her -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="shortcut icon" href="images/net-coder-logo icon.png">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Blog Grid Styling */
-        .blogs {
-            padding: 4rem 0;
-            min-height: 60vh; /* Ensures footer stays down if few blogs */
-        }
-        
-        .blog-col {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .blog-card {
-            background: #ffffff;
-            border-radius: 12px;
-            overflow: hidden;
-            border:none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(255, 102, 0, 0.15);
-        }
-        
-        .blog-card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-        }
-        
-        .blog-card-content {
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        
-        .blog-card h5 {
-            margin: 0 0 1rem 0;
-            font-size: 1.2rem;
-            line-height: 1.4;
-            font-weight: 700;
-        }
-        
-        .blog-card h5 a {
-            color: #222;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .blog-card h5 a:hover {
-            color: #ff6600;
-        }
-        
-        .blog-card small {
-            display: inline-block;
-            background: rgba(255, 102, 0, 0.1);
-            color: #ff6600;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .blog-meta {
-            color: #888;
-            font-size: 0.85rem;
-            margin-top: auto; /* Pushes meta to bottom */
-            padding-top: 1rem;
-            border-top: 1px solid #eee;
-        }
-        
-         .blog-excerpt {
-            color: #555;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .admin-link {
-            text-align: center;
-            margin-top: 20px;
-            display:none;
-        }
-        .admin-link a {
-            color: #ccc;
-            text-decoration: none;
-            font-size: 0.8rem;
-        }
-        .admin-link a:hover { color: #ff6600; }
-    </style>
 </head>
+
+
 <body>
-   <header class="main-header">
+ <header class="main-header">
         <nav class="main-nav">
 
             <!-- LOGO -->
@@ -242,6 +138,7 @@ if ($result) {
 
         </nav>
     </header>
+
     <!-- side menu -->
     <div class="side-menu" id="mobileMenu">
 
@@ -290,7 +187,8 @@ if ($result) {
                         <h4>Professional Courses</h4>
                         <a href="business-analytics.php">Data Science & Business Analytics</a>
                         <a href="machine-learning.php">Data Science & Machine Learning</a>
-                                <a href="data-analytics.php">Data Analytics</a>
+                        <a href="data-analytics.php">Data Analytics</a>
+
                         <a href="cyber-security.php">Complete Cyber Security Course</a>
                         <a href="ethical-hacking.php">Ethical Hacking</a>
                         <a href="software-engineering.php">Software Engineering With Python</a>
@@ -318,7 +216,7 @@ if ($result) {
                     Online Courses<span class="icon-arrow"></span></div>
                 <div class="side-dropdown">
 
-                      <a href="web&app-online.php">Full Stack & Apps</a>
+                    <a href="web&app-online.php">Full Stack & Apps</a>
                     <a href="digital-marketing-online.php">Digital Marketing</a>
                     <a href="data-science-online.php">Data Science</a>
                     <a href="data-analytics-online.php">Data Analytics</a>
@@ -336,6 +234,7 @@ if ($result) {
         </div>
     </div>
 
+  <!-- hero section -->
     <section class="page-hero">
         <ul class="circles">
             <li></li>
@@ -348,77 +247,391 @@ if ($result) {
             <li></li>
             <li></li>
             <li></li>
-            <li></li>
         </ul>
+        <!--  -->
         <div class="page-title">
-            <div>BLOGS</div>
-            <p>HOME / <b>BLOGS</b></p>
+            <div>Training & Internships</div>
+            <p>HOME / <b> Training & Internships</b></p>
+        </div>
+    </section>
+    <!-- who should join -->
+    <!-- <div class="container about about-2 section-height">
+        <div><img src="images/mission.png" alt></div>
+        <div>
+            <h3>Who Should Join Our </h3>
+            <h2><span>Full Stack & App Development Course?</span></h2>
+
+            <p>This course is perfect for students, freshers, and working professionals who want to build a career in
+                software development.</p>
+
+            <p>If you're interested in creating websites, web apps, or mobile applications, this program will help you
+                gain practical coding skills and industry experience.</p>
+            HOW COURSE WORKS
+        </div>
+    </div> -->
+<section class="internship-section container">
+    <div class="wrapper">
+
+        <!-- Heading -->
+        <div class="section-heading">
+            <h2>
+                  <span>Types of</span> Internships
+            </h2>
+           <p class="intro-text mt-3">
+                    Industrial training bridges the gap between academic learning and real industry experience. At
+                    Netcoder Technology, students work on practical projects, modern technologies, and real development
+                    environments. Our programs are designed to help students build strong technical skills, understand
+                    professional workflows, and gain confidence in solving real-world problems.</p>
+              
+        </div>
+
+        <!-- Cards -->
+        <div class="card-grid">
+
+            <!-- Card 1 -->
+            <div class="intern-card">
+                <div class="card-top">
+                    <div class="icon-box">
+                           <i class="fa-solid fa-code"></i>
+                    </div>
+                           <h3>Paid Internship</h3>
+                </div>
+    <p class="card-desc ">
+                        In a paid internship, students receive financial compensation for their
+                        contribution to real development projects.
+                    </p>
+
+                    <ul class="custom-list">
+                        <li>Work on live company projects</li>
+                        <li>Performance based stipend</li>
+                        <li>Industry mentorship</li>
+                        <li>Certificate & experience letter</li>
+                    </ul>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="intern-card">
+                <div class="card-top">
+                    <div class="icon-box">
+                                                    <i class="fa-solid fa-code"></i>
+
+                    </div>
+                    <h3>Stipend Based Internship</h3>
+                </div>
+
+                <p class="card-desc">
+                        Students receive stipend opportunities based on performance,
+                        project contribution, and skill level.
+                    </p>
+
+                    <ul class="custom-list">
+                        <li>Live development tasks</li>
+                        <li>Skill evaluation</li>
+                        <li>Monthly stipend opportunities</li>
+                        <li>Project experience</li>
+                    </ul>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="intern-card">
+                <div class="card-top">
+                    <div class="icon-box">
+                         <i class="fa-solid fa-code"></i>
+                    </div>
+                            <h3>Free Internship</h3>
+                </div>
+
+              <p class="card-desc">
+                        Free internships are designed for students who want practical exposure
+                        and skill development without financial obligations.
+                    </p>
+
+                    <ul class="custom-list">
+                        <li>Learning focused internship</li>
+                        <li>Real project participation</li>
+                        <li>Guidance from mentors</li>
+                        <li>Certificate after completion</li>
+                    </ul>
+
+                   
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+    <div class="container break left">
+        <img src="images/which-course.png" alt="Need guidance">
+        <div>
+            <h2>Not Sure What Path To Choose?</h2>
+            <p>Whether you're a student searching for the right IT course or a business looking for professional digital
+                solutions, Netcoder Technology is here to guide you.</p>
+            <a href="contact.php" class="white-btn">Contact Us</a>
+        </div>
+    </div>
+
+<!-- Not Sure -->
+    <!-- <div class="container break mt-3">
+        <img src="images/query.png" alt="Have any query">
+        <div>
+            <h2>How Our Full Stack Course Works?</h2>
+            <p>Learn step-by-step from basics to advanced development with hands-on projects, live sessions, and
+                mentorship support. Get guidance from industry experts and build real applications.</p>
+            <a href="contact.php" class="white-btn">Contact Us</a>
+        </div>
+    </div> -->
+
+
+     <!--placed student start  -->
+    <!-- Swiper -->
+    <div class="container">
+        <section class="placed-main">
+            <h2 class="heading">Our <span>Alumni</span></h2>
+            <p>Empowering our alumni to shape the future, one success story at a time.</p>
+
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <!-- All Alumni Cards -->
+                    <div class="swiper-slide">
+                        <img src="images/aditiya.jpg" alt="aditiya" />
+                        <h2>Aditiya Thakur</h2>
+                        <h3>Full-Stack Developer</h3>
+                        <p>Signore Technologies Pvt. Ltd.</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/akshay.png" alt="Akshay" />
+                        <h2>Akshay Bhardwaj</h2>
+                        <h3>Graphic Designer</h3>
+                        <p>Swiftedge Solutions Pvt.Ltd.</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/sunil.png" alt="sunil" />
+                        <h2>Sunil</h2>
+                        <h3>Graphic Designer</h3>
+                        <p>Social Gtm</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/sapna.jpg" alt="Sapna" />
+                        <h2>Sapna</h2>
+                        <h3>Front-End Developer</h3>
+                        <p>Unmetered Technologies LLP</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/Manju.jpeg" alt="manju" />
+                        <h2>Manju</h2>
+                        <h3>Graphic Designer</h3>
+                        <p>Cube Infotech</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/Saurabh.jpeg" alt="Saurabh" />
+                        <h2>Saurabh Guleria</h2>
+                        <h3>UI/UX Designer</h3>
+                        <p>App Mechanic</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/Shivdeep.png" alt="Shivdeep" />
+                        <h2>Shivdeep Singh</h2>
+                        <h3>Sr.Port Engineer</h3>
+                        <p>Smith Enterprises At JNPT</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/Akhil.jpeg" alt="Akhil" />
+                        <h2>Akhil Katoch</h2>
+                        <h3>Full-Stack Developer</h3>
+                        <p>RichestSoft</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/abhishek.png" alt="abhishek" />
+                        <h2>Abhishek Bhardwaj</h2>
+                        <h3>Sr. Graphic Designer</h3>
+                        <p>Social Simba</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/harshit.jpeg" alt="Harshit" />
+                        <h2>Harshit Awasthi</h2>
+                        <h3>UI/UX Designer</h3>
+                        <p>Development Logics</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/manhor.jpeg" alt="Manohar" />
+                        <h2>Manohar Lal</h2>
+                        <h3>Full-Stack Developer</h3>
+                        <p>Cubix Technologies</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/rohit.png" alt="Rohit Jaswal" />
+                        <h2>Rohit Jaswal</h2>
+                        <h3>UI/UX Designer</h3>
+                        <p>The Vagabond</p>
+                    </div>
+                </div>
+
+                <!-- Navigation buttons -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </section>
+    </div>
+    
+
+  <!-- roadmap  -->
+    <section class="timeline container">
+
+        <div class="timeline-line">
+            <div class="timeline-progress"></div>
+        </div>
+
+        <!-- ITEM -->
+        <div class="timeline-item">
+            <div class="circle">1</div>
+            <div class="timeline-card">
+                <h3>Resume <span>Revamp</span></h3>
+                <p>Transform your resume into a powerful marketing tool that showcases your digital marketing skills and
+                    achievements. Learn industry best practices and get expert feedback.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="circle">2</div>
+            <div class="timeline-card">
+                <h3>LinkedIn <span>Optimization</span></h3>
+                <p>Optimize your LinkedIn profile to attract recruiters and potential employers. Master the art of
+                    personal branding and build a strong professional online presence.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="circle">3</div>
+            <div class="timeline-card">
+                <h3>Portfolio <span>Building</span></h3>
+                <p>Create a stunning portfolio that demonstrates your digital marketing expertise. Showcase real-world
+                    projects, campaigns, and measurable results that set you apart.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="circle">4</div>
+            <div class="timeline-card">
+                <h3>Pitch <span>Perfect</span></h3>
+                <p>Develop compelling elevator pitches and learn to articulate your value proposition. Master the art of
+                    selling yourself and your skills with confidence.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="circle">5</div>
+            <div class="timeline-card">
+                <h3>Mock <span>Interviews</span></h3>
+                <p>Practice with industry experts through realistic mock interviews. Receive personalized feedback,
+                    refine your responses, and build confidence for the real thing.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="circle">6</div>
+            <div class="timeline-card">
+                <h3>Resume <span>Revamp</span></h3>
+                <p>Transform your resume into a powerful marketing tool that showcases your digital marketing skills and
+                    achievements.</p>
+            </div>
         </div>
     </section>
 
-    <div class="blogs container">
-        <?php if (count($blogs) > 0): ?>
-            <div class="blog-col">
-                <?php foreach ($blogs as $blog): ?>
-                <div class="blog-card">
-                    <a href="blog-details.php?slug=<?php echo $blog['slug']; ?>">
-                        <?php if (!empty($blog['main_image'])): ?>
-                            <img src="<?php echo htmlspecialchars($blog['main_image']); ?>" alt="<?php echo htmlspecialchars($blog['title']); ?>">
-                        <?php else: ?>
-                            <div style="height:220px; background:#f0f0f0; display:flex; align-items:center; justify-content:center; color:#999;">
-                                <img src="images/default-blog.jpg" alt="Default Blog" style="object-fit:cover; height:100%;">
-                            </div>
-                        <?php endif; ?>
-                    </a>
-                    
-                    <div class="blog-card-content">
-                        <div style="margin-bottom: 10px;">
-                            <?php 
-                            if(!empty($blog['tags'])) {
-                                $tags = explode(',', $blog['tags']);
-                                foreach ($tags as $tag):
-                                    if (trim($tag)):
-                            ?>
-                                    <small>#<?php echo trim($tag); ?></small>
-                            <?php 
-                                    endif;
-                                endforeach; 
-                            }
-                            ?>
-                        </div>
 
-                        <h5>
-                            <a href="blog-details.php?slug=<?php echo $blog['slug']; ?>">
-                                <?php echo htmlspecialchars($blog['title']); ?>
-                            </a>
-                        </h5>
-                        
-                        <?php if (!empty($blog['excerpt'])): ?>
-                            <p class="blog-excerpt">
-                                <?php echo htmlspecialchars(substr($blog['excerpt'], 0, 120)); ?>...
-                            </p>
-                        <?php endif; ?>
-                        
-                        <div class="blog-meta">
-                            By <?php echo htmlspecialchars($blog['author']); ?> | 
-                            <?php echo date('M d, Y', strtotime($blog['date_posted'])); ?>
-                        </div>
-                    </div>
-                </div>
-                <?php endforeach; ?>
+
+
+<!-- FAQs -->
+<div class="accordion container">
+    <div class="headings">
+            <h2>Frequently Asked <span>Questions</span></h2>
+
+        <small>Explore different internship opportunities designed to give you practical experience, industry exposure, and career growth.</small>
+    </div>
+
+    <div class="accordion-item">
+        <div class="accordion-header active">
+            <h5>What types of internships do you offer?</h5>
+        </div>
+        <div class="accordion-content show">
+            <p>We offer multiple internship types including Web Development, Full Stack Development, Mobile App Development, and Digital Marketing internships based on your learning path.</p>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <h5>What is a Web Development internship?</h5>
+        </div>
+        <div class="accordion-content">
+            <p>This internship focuses on building responsive websites using HTML, CSS, JavaScript, and modern frontend tools to create real-world UI projects.</p>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <h5>What is included in a Full Stack internship?</h5>
+        </div>
+        <div class="accordion-content">
+            <p>Full Stack internships cover both frontend and backend technologies including React, Node.js, Express, and databases like MongoDB, helping you build complete web applications.</p>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <h5>Do you provide Mobile App Development internships?</h5>
+        </div>
+        <div class="accordion-content">
+            <p>Yes, we provide mobile app internships where you learn to build Android or cross-platform apps using modern frameworks and tools.</p>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <h5>Are internships project-based?</h5>
+        </div>
+        <div class="accordion-content">
+            <p>Yes, all internships are project-based, allowing you to work on real-world applications such as e-commerce platforms, dashboards, and mobile apps.</p>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <h5>Will I receive a certificate after internship?</h5>
+        </div>
+        <div class="accordion-content">
+            <p>Yes, upon successful completion of the internship, you will receive an industry-recognized certificate along with project experience to showcase in your portfolio.</p>
+        </div>
+    </div>
+</div>
+
+    
+    <!-- Blogs -->
+    <div class="blogs container">
+        <div class="headings container">
+            <h2>Latest <span>Blogs</span></h2><small>Visit our blog to discover comprehensive information</small>
+        </div>
+        <div class="blog-col">
+            <div class="blog-card"><img src="images/typography-blog.png" alt><a href="typography-blog.php">
+                    <h5>How can typography be used effectively in branding?</h5>
+                </a>
+                <div><small>#Graphic Designing</small></div>
             </div>
-        <?php else: ?>
-            <div style="text-align: center; padding: 4rem; color: #888;">
-                <h3>No blog posts found.</h3>
-                <p>Check back later for updates!</p>
+            <div class="blog-card"><img src="images/trends.png" alt><a href="graphics-trend-blog.php">
+                    <h5>Top Graphic Design Trends to Watch in 2025</h5>
+                </a>
+                <div><small>#Graphic Designing</small></div>
             </div>
-        <?php endif; ?>
-        
-        <!-- 
-         -->
+            <div class="blog-card"><img src="images/web-blog.png" alt><a href="web-dev-blog.php">
+                    <h5>How is Artificial Intelligence shaping the future of web development?</h5>
+                </a>
+                <div><small>#Web Development</small></div>
+            </div>
+        </div>
+        <div class="button"><a href="blog.php" class="color-btn">Read All Blogs</a></div>
     </div>
 
     <!-- footer -->
+     <!-- footer -->
     <footer>
         <div class="container">
             <div class="newsletter">
@@ -526,7 +739,60 @@ if ($result) {
             </div>
         </div>
     </footer>
-    
+
+
+
     <script src="main.js"></script>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            centeredSlides: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 40,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+                1400: {
+                    slidesPerView: 4,
+                    spaceBetween: 30,
+                },
+            },
+        });
+
+        // Stop autoplay on card click and resume after 8s
+        document.querySelectorAll(".swiper-slide").forEach(function (slide) {
+            slide.addEventListener("click", function () {
+                swiper.autoplay.stop();
+                setTimeout(function () {
+                    swiper.autoplay.start();
+                }, 8000);
+            });
+        });
+    </script>
+
+
 </body>
+
 </html>

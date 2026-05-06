@@ -1,143 +1,28 @@
- <?php
-require_once 'config.php';
-
-// 1. Get the slug from the URL
-if (isset($_GET['slug'])) {
-    $slug = $conn->real_escape_string($_GET['slug']);
-
-    // 2. Fetch Main Blog Post
-    $sql = "SELECT * FROM blogs WHERE slug = '$slug'";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        $blog = $result->fetch_assoc();
-        $blog_id = $blog['id'];
-
-        // 3. Fetch Additional Content Sections
-        $section_sql = "SELECT * FROM blog_sections WHERE blog_id = $blog_id";
-        $sections = $conn->query($section_sql);
-    } else {
-        // Redirect to blog list if slug not found
-        header("Location: blog.php");
-        exit();
-    }
-} else {
-    header("Location: blog.php");
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($blog['title']); ?> | Netcoder Technology</title>
-    <meta name="description" content="<?php echo htmlspecialchars($blog['excerpt']); ?>">
-     <!-- font awesomme linked her -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="description"
+        content="Discover Netcoder Technology, a premier IT training institute in Dharamshala. Learn about our mission to empower students with essential tech skills, expert instruction, and real-world experience for a successful career in IT.">
+    <title>Careers at Netcoder Technology | Job Opportunities in
+        Dharamshala</title>
+    <!-- canonical tag -->
+    <link rel="canonical" href="https://www.netcoder.in/career/" />
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- favicon -->
     <link rel="shortcut icon" href="images/net-coder-logo icon.png">
-    <link rel="stylesheet" href="style.css"> <style>
-        /* --- Blog Detail Specific Styles --- */
-        .blog-detail-page {
-            background-color: #f9f9f9;
-            padding: 40px 0;
-            min-height: 80vh;
-        }
+    <!-- css -->
+    <link rel="stylesheet" href="style.css">
+<!-- font awesomme linked her -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        .blog-content-wrapper {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-
-        /* Back Button */
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            text-decoration: none;
-            color: #555;
-            font-weight: 600;
-            margin-bottom: 25px;
-            transition: 0.3s;
-            background: #f0f0f0;
-            padding: 8px 16px;
-            border-radius: 30px;
-        }
-        .back-btn:hover {
-            background: #ff6600;
-            color: #fff;
-            transform: translateX(-5px);
-        }
-        .back-btn svg { margin-right: 8px; }
-
-        /* Blog Header */
-        .article-header h1 {
-            font-size: 2.5rem;
-            color: #222;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-        .article-meta {
-            color: #777;
-            font-size: 0.95rem;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .article-meta span { display: inline-flex; align-items: center; }
-        .article-meta svg { width: 16px; height: 16px; margin-right: 5px; }
-
-        /* Images */
-        .main-featured-image {
-            width: 100%;
-            height: auto;
-            max-height: 500px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .section-image {
-            width: 100%;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-
-        /* Content Typography */
-        .article-body {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #333;
-        }
-        .article-body p { margin-bottom: 20px; }
-        
-        /* Dynamic Sections */
-        .content-block {
-            margin-top: 40px;
-            padding-top: 20px;
-        }
-        .content-block h2 {
-            color: #ff6600;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .blog-content-wrapper { padding: 20px; }
-            .article-header h1 { font-size: 1.8rem; }
-        }
-    </style>
 </head>
+
 <body>
-    <header class="main-header">
+  <header class="main-header">
         <nav class="main-nav">
 
             <!-- LOGO -->
@@ -195,7 +80,6 @@ if (isset($_GET['slug'])) {
                                 <a href="business-analytics.php">Data Science & Business Analytics</a>
                                 <a href="machine-learning.php">Data Science & Machine Learning</a>
                                 <a href="data-analytics.php">Data Analytics</a>
-
                                 <a href="cyber-security.php">Complete Cyber Security Course</a>
                                 <a href="ethical-hacking.php">Ethical Hacking</a>
                                 <a href="software-engineering.php">Software Engineering With Python</a>
@@ -253,6 +137,7 @@ if (isset($_GET['slug'])) {
 
         </nav>
     </header>
+
     <!-- side menu -->
     <div class="side-menu" id="mobileMenu">
 
@@ -301,7 +186,7 @@ if (isset($_GET['slug'])) {
                         <h4>Professional Courses</h4>
                         <a href="business-analytics.php">Data Science & Business Analytics</a>
                         <a href="machine-learning.php">Data Science & Machine Learning</a>
-                                <a href="data-analytics.php">Data Analytics</a>
+                        <a href="data-analytics.php">Data Analytics</a>
 
                         <a href="cyber-security.php">Complete Cyber Security Course</a>
                         <a href="ethical-hacking.php">Ethical Hacking</a>
@@ -330,7 +215,7 @@ if (isset($_GET['slug'])) {
                     Online Courses<span class="icon-arrow"></span></div>
                 <div class="side-dropdown">
 
-                      <a href="web&app-online.php">Full Stack & Apps</a>
+                    <a href="web&app-online.php">Full Stack & Apps</a>
                     <a href="digital-marketing-online.php">Digital Marketing</a>
                     <a href="data-science-online.php">Data Science</a>
                     <a href="data-analytics-online.php">Data Analytics</a>
@@ -348,73 +233,226 @@ if (isset($_GET['slug'])) {
         </div>
     </div>
 
-
-    <div class="blog-detail-page">
-        <div class="container">
-            <div class="blog-content-wrapper">
-                
-                <a href="blog.php" class="back-btn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="19" y1="12" x2="5" y2="12"></line>
-                        <polyline points="12 19 5 12 12 5"></polyline>
-                    </svg>
-                    Back to All Blogs
-                </a>
-
-                <article>
-                    <header class="article-header">
-                        <h1><?php echo htmlspecialchars($blog['title']); ?></h1>
-                        
-                        <div class="article-meta">
-                            <span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                <?php echo htmlspecialchars($blog['author']); ?>
-                            </span>
-                            <span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                                <?php echo date('F d, Y', strtotime($blog['date_posted'])); ?>
-                            </span>
-                            <?php if(!empty($blog['tags'])): ?>
-                            <span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-                                <?php echo htmlspecialchars($blog['tags']); ?>
-                            </span>
-                            <?php endif; ?>
-                        </div>
-                    </header>
-
-                    <?php if (!empty($blog['main_image'])): ?>
-                        <img src="<?php echo htmlspecialchars($blog['main_image']); ?>" alt="<?php echo htmlspecialchars($blog['title']); ?>" class="main-featured-image">
-                    <?php endif; ?>
-
-                    <div class="article-body">
-                        <?php echo nl2br($blog['main_content']); ?>
-                    </div>
-
-                    <?php while($sec = $sections->fetch_assoc()): ?>
-                        <div class="content-block">
-                            <?php if (!empty($sec['section_title'])): ?>
-                                <h2><?php echo htmlspecialchars($sec['section_title']); ?></h2>
-                            <?php endif; ?>
-
-                            <?php if (!empty($sec['section_content'])): ?>
-                                <div class="article-body">
-                                    <?php echo nl2br($sec['section_content']); ?>
-                                </div>
-                            <?php endif; ?>
-
-                            <?php if (!empty($sec['section_image'])): ?>
-                                <img src="<?php echo htmlspecialchars($sec['section_image']); ?>" alt="Section visual" class="section-image">
-                            <?php endif; ?>
-                        </div>
-                    <?php endwhile; ?>
-
-                </article>
+    <!-- Banner Section start -->
+    <section class="page-hero">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <!--  -->
+        <div class="page-title">
+            <div>CAREER</div>
+            <p>HOME / <b>CAREER</b></p>
+        </div>
+    </section>
+    <!-- banner section end -->
+    <!-- creative future -->
+    <div class="container about">
+        <div class="creative-future">
+            <h2>We Make <span>Students Creative Future</span></h2>
+            <p>Encourage students to work on real-world projects from the
+                beginning. This could include designing logos,
+                websites, branding materials, etc. Practical experience is
+                invaluable in learning design.</p>
+            <div>
+                <div>
+                    <h6>
+                        <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 2.01672C6.486 2.01672 2 6.50272 2 12.0167C2 17.5307 6.486 22.0167 12 22.0167C17.514 22.0167 22 17.5307 22 12.0167C22 6.50272 17.514 2.01672 12 2.01672ZM10.001 16.4297L6.99545 13.4307C6.6047 13.0407 6.60391 12.4079 6.99369 12.017C7.38371 11.6259 8.01701 11.6252 8.40793 12.0154L9.999 13.6037L14.586 9.01672C14.9765 8.62626 15.6095 8.62626 16 9.01672C16.3905 9.40719 16.3905 10.0403 16 10.4307L10.001 16.4297Z"
+                                fill="#ff5532" ; />
+                            <defs>
+                                <lineargradient id="paint0_linear_303_27" x1="12" y1="2.01672" x2="12" y2="22.0167"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#FB8454" />
+                                    <stop offset="1" stop-color="#FF4E4E" />
+                                </lineargradient>
+                            </defs>
+                        </svg>
+                        Project-Based Learning
+                    </h6>
+                    <h6>
+                        <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 2.01672C6.486 2.01672 2 6.50272 2 12.0167C2 17.5307 6.486 22.0167 12 22.0167C17.514 22.0167 22 17.5307 22 12.0167C22 6.50272 17.514 2.01672 12 2.01672ZM10.001 16.4297L6.99545 13.4307C6.6047 13.0407 6.60391 12.4079 6.99369 12.017C7.38371 11.6259 8.01701 11.6252 8.40793 12.0154L9.999 13.6037L14.586 9.01672C14.9765 8.62626 15.6095 8.62626 16 9.01672C16.3905 9.40719 16.3905 10.0403 16 10.4307L10.001 16.4297Z"
+                                fill="#ff5532" />
+                            <defs>
+                                <lineargradient id="paint0_linear_303_27" x1="12" y1="2.01672" x2="12" y2="22.0167"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#FB8454" />
+                                    <stop offset="1" stop-color="#FF4E4E" />
+                                </lineargradient>
+                            </defs>
+                        </svg>
+                        Soft Skills Development
+                    </h6>
+                </div>
+                <!--  -->
+                <div>
+                    <h6>
+                        <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 2.01672C6.486 2.01672 2 6.50272 2 12.0167C2 17.5307 6.486 22.0167 12 22.0167C17.514 22.0167 22 17.5307 22 12.0167C22 6.50272 17.514 2.01672 12 2.01672ZM10.001 16.4297L6.99545 13.4307C6.6047 13.0407 6.60391 12.4079 6.99369 12.017C7.38371 11.6259 8.01701 11.6252 8.40793 12.0154L9.999 13.6037L14.586 9.01672C14.9765 8.62626 15.6095 8.62626 16 9.01672C16.3905 9.40719 16.3905 10.0403 16 10.4307L10.001 16.4297Z"
+                                fill="#ff5532" />
+                            <defs>
+                                <lineargradient id="paint0_linear_303_27" x1="12" y1="2.01672" x2="12" y2="22.0167"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#FB8454" />
+                                    <stop offset="1" stop-color="#FF4E4E" />
+                                </lineargradient>
+                            </defs>
+                        </svg>
+                        Community Engagement
+                    </h6>
+                    <h6>
+                        <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 2.01672C6.486 2.01672 2 6.50272 2 12.0167C2 17.5307 6.486 22.0167 12 22.0167C17.514 22.0167 22 17.5307 22 12.0167C22 6.50272 17.514 2.01672 12 2.01672ZM10.001 16.4297L6.99545 13.4307C6.6047 13.0407 6.60391 12.4079 6.99369 12.017C7.38371 11.6259 8.01701 11.6252 8.40793 12.0154L9.999 13.6037L14.586 9.01672C14.9765 8.62626 15.6095 8.62626 16 9.01672C16.3905 9.40719 16.3905 10.0403 16 10.4307L10.001 16.4297Z"
+                                fill="#ff5532" />
+                            <defs>
+                                <lineargradient id="paint0_linear_303_27" x1="12" y1="2.01672" x2="12" y2="22.0167"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#FB8454" />
+                                    <stop offset="1" stop-color="#FF4E4E" />
+                                </lineargradient>
+                            </defs>
+                        </svg>
+                        Internships
+                    </h6>
+                </div>
+                <!--  -->
             </div>
         </div>
+        <!--  -->
+        <div>
+            <img src="images/future.png" alt>
+        </div>
+    </div>
+    <!-- creative future end -->
+    <!-- our placement -->
+
+    <!-- <div class="join container">
+    <div class="headings container">
+        <h2><span>Our Placed Students</span></h2>
+        <small>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, dicta? Animi error eius eligendi sit id quod veniam, aliquid molestiae.</small>
+    </div>
+    
+</div> -->
+    <!--placed student start  -->
+    <!-- Swiper -->
+    <div class="container">
+        <section class="placed-main">
+            <h2 class="heading">Our <span>Alumni</span></h2>
+            <p>Empowering our alumni to shape the future, one success story at a time.</p>
+
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <!-- All Alumni Cards -->
+                    <div class="swiper-slide">
+                        <img src="images/aditiya.jpg" alt="aditiya" />
+                        <h2>Aditiya Thakur</h2>
+                        <h3>Full-Stack Developer</h3>
+                        <p>Signore Technologies Pvt. Ltd.</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/akshay.png" alt="Akshay" />
+                        <h2>Akshay Bhardwaj</h2>
+                        <h3>Graphic Designer</h3>
+                        <p>Swiftedge Solutions Pvt.Ltd.</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/sunil.png" alt="sunil" />
+                        <h2>Sunil</h2>
+                        <h3>Graphic Designer</h3>
+                        <p>Social Gtm</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/sapna.jpg" alt="Sapna" />
+                        <h2>Sapna</h2>
+                        <h3>Front-End Developer</h3>
+                        <p>Unmetered Technologies LLP</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/Manju.jpeg" alt="manju" />
+                        <h2>Manju</h2>
+                        <h3>Graphic Designer</h3>
+                        <p>Cube Infotech</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/Saurabh.jpeg" alt="Saurabh" />
+                        <h2>Saurabh Guleria</h2>
+                        <h3>UI/UX Designer</h3>
+                        <p>App Mechanic</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/Shivdeep.png" alt="Shivdeep" />
+                        <h2>Shivdeep Singh</h2>
+                        <h3>Sr.Port Engineer</h3>
+                        <p>Smith Enterprises At JNPT</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/Akhil.jpeg" alt="Akhil" />
+                        <h2>Akhil Katoch</h2>
+                        <h3>Full-Stack Developer</h3>
+                        <p>RichestSoft</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/abhishek.png" alt="abhishek" />
+                        <h2>Abhishek Bhardwaj</h2>
+                        <h3>Sr. Graphic Designer</h3>
+                        <p>Social Simba</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/harshit.jpeg" alt="Harshit" />
+                        <h2>Harshit Awasthi</h2>
+                        <h3>UI/UX Designer</h3>
+                        <p>Development Logics</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/manhor.jpeg" alt="Manohar" />
+                        <h2>Manohar Lal</h2>
+                        <h3>Full-Stack Developer</h3>
+                        <p>Cubix Technologies</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/rohit.png" alt="Rohit Jaswal" />
+                        <h2>Rohit Jaswal</h2>
+                        <h3>UI/UX Designer</h3>
+                        <p>The Vagabond</p>
+                    </div>
+                </div>
+
+                <!-- Navigation buttons -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </section>
     </div>
 
-     <!-- footer -->
+    <!-- placed student end -->
+
+    <!-- Optimhire start-->
+
+    <div class="optimhire container">
+        <h2><span>Start your career With NetCoder Technology</span></h2>
+        <p>If you are motivated and drifven to succeed, we invite you to
+            apply today!</p>
+        <iframe
+            src="https://optimhire.com/d/Search-job-iframe?ref_code=netcoder-technology&skill=&positions=&dark_color=fb8454&light_color=62abb3"
+            width="100%" height="800"></iframe>
+    </div>
+
+    <!-- Optimhire end -->
+
+    <!-- footer -->
     <footer>
         <div class="container">
             <div class="newsletter">
@@ -522,7 +560,59 @@ if (isset($_GET['slug'])) {
             </div>
         </div>
     </footer>
-    
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script defer src="assets/DemoClass.js"></script>
     <script src="main.js"></script>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            centeredSlides: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 40,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+                1400: {
+                    slidesPerView: 4,
+                    spaceBetween: 30,
+                },
+            },
+        });
+
+        // Stop autoplay on card click and resume after 8s
+        document.querySelectorAll(".swiper-slide").forEach(function (slide) {
+            slide.addEventListener("click", function () {
+                swiper.autoplay.stop();
+                setTimeout(function () {
+                    swiper.autoplay.start();
+                }, 8000);
+            });
+        });
+    </script>
 </body>
+
 </html>

@@ -1,143 +1,22 @@
- <?php
-require_once 'config.php';
-
-// 1. Get the slug from the URL
-if (isset($_GET['slug'])) {
-    $slug = $conn->real_escape_string($_GET['slug']);
-
-    // 2. Fetch Main Blog Post
-    $sql = "SELECT * FROM blogs WHERE slug = '$slug'";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        $blog = $result->fetch_assoc();
-        $blog_id = $blog['id'];
-
-        // 3. Fetch Additional Content Sections
-        $section_sql = "SELECT * FROM blog_sections WHERE blog_id = $blog_id";
-        $sections = $conn->query($section_sql);
-    } else {
-        // Redirect to blog list if slug not found
-        header("Location: blog.php");
-        exit();
-    }
-} else {
-    header("Location: blog.php");
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($blog['title']); ?> | Netcoder Technology</title>
-    <meta name="description" content="<?php echo htmlspecialchars($blog['excerpt']); ?>">
-     <!-- font awesomme linked her -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="keywords"content="Netcoder Technology privacy policy, data protection, information security, user privacy, personal information usage, cookies policy, data collection practices, privacy rights, IT training institute privacy, data confidentiality">
+    <meta name="description" content="Read the Privacy Policy of Netcoder Technology to understand how we protect your personal information and data. Learn about our data collection practices, user rights, and commitment to information security.">
+    <title>Privacy Policy | Netcoder Technology - Your Data Protection Matters</title>
+    <!-- favicon -->
     <link rel="shortcut icon" href="images/net-coder-logo icon.png">
-    <link rel="stylesheet" href="style.css"> <style>
-        /* --- Blog Detail Specific Styles --- */
-        .blog-detail-page {
-            background-color: #f9f9f9;
-            padding: 40px 0;
-            min-height: 80vh;
-        }
-
-        .blog-content-wrapper {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-
-        /* Back Button */
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            text-decoration: none;
-            color: #555;
-            font-weight: 600;
-            margin-bottom: 25px;
-            transition: 0.3s;
-            background: #f0f0f0;
-            padding: 8px 16px;
-            border-radius: 30px;
-        }
-        .back-btn:hover {
-            background: #ff6600;
-            color: #fff;
-            transform: translateX(-5px);
-        }
-        .back-btn svg { margin-right: 8px; }
-
-        /* Blog Header */
-        .article-header h1 {
-            font-size: 2.5rem;
-            color: #222;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-        .article-meta {
-            color: #777;
-            font-size: 0.95rem;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .article-meta span { display: inline-flex; align-items: center; }
-        .article-meta svg { width: 16px; height: 16px; margin-right: 5px; }
-
-        /* Images */
-        .main-featured-image {
-            width: 100%;
-            height: auto;
-            max-height: 500px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .section-image {
-            width: 100%;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-
-        /* Content Typography */
-        .article-body {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #333;
-        }
-        .article-body p { margin-bottom: 20px; }
-        
-        /* Dynamic Sections */
-        .content-block {
-            margin-top: 40px;
-            padding-top: 20px;
-        }
-        .content-block h2 {
-            color: #ff6600;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .blog-content-wrapper { padding: 20px; }
-            .article-header h1 { font-size: 1.8rem; }
-        }
-    </style>
+    <!-- css -->
+    <link rel="stylesheet" href="style.css">
+<!-- font awesomme linked her -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
-    <header class="main-header">
+   <header class="main-header">
         <nav class="main-nav">
 
             <!-- LOGO -->
@@ -195,7 +74,6 @@ if (isset($_GET['slug'])) {
                                 <a href="business-analytics.php">Data Science & Business Analytics</a>
                                 <a href="machine-learning.php">Data Science & Machine Learning</a>
                                 <a href="data-analytics.php">Data Analytics</a>
-
                                 <a href="cyber-security.php">Complete Cyber Security Course</a>
                                 <a href="ethical-hacking.php">Ethical Hacking</a>
                                 <a href="software-engineering.php">Software Engineering With Python</a>
@@ -253,6 +131,7 @@ if (isset($_GET['slug'])) {
 
         </nav>
     </header>
+
     <!-- side menu -->
     <div class="side-menu" id="mobileMenu">
 
@@ -301,7 +180,7 @@ if (isset($_GET['slug'])) {
                         <h4>Professional Courses</h4>
                         <a href="business-analytics.php">Data Science & Business Analytics</a>
                         <a href="machine-learning.php">Data Science & Machine Learning</a>
-                                <a href="data-analytics.php">Data Analytics</a>
+                        <a href="data-analytics.php">Data Analytics</a>
 
                         <a href="cyber-security.php">Complete Cyber Security Course</a>
                         <a href="ethical-hacking.php">Ethical Hacking</a>
@@ -330,7 +209,7 @@ if (isset($_GET['slug'])) {
                     Online Courses<span class="icon-arrow"></span></div>
                 <div class="side-dropdown">
 
-                      <a href="web&app-online.php">Full Stack & Apps</a>
+                    <a href="web&app-online.php">Full Stack & Apps</a>
                     <a href="digital-marketing-online.php">Digital Marketing</a>
                     <a href="data-science-online.php">Data Science</a>
                     <a href="data-analytics-online.php">Data Analytics</a>
@@ -349,82 +228,132 @@ if (isset($_GET['slug'])) {
     </div>
 
 
-    <div class="blog-detail-page">
-        <div class="container">
-            <div class="blog-content-wrapper">
-                
-                <a href="blog.php" class="back-btn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="19" y1="12" x2="5" y2="12"></line>
-                        <polyline points="12 19 5 12 12 5"></polyline>
-                    </svg>
-                    Back to All Blogs
-                </a>
+    <!-- hero section -->
+    <section class="page-hero">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <!--  -->
+        <div class="page-title">
+            <div>Privacy Policy</div>
+            <p>HOME / <b>Privacy Policy</b></p>
+        </div>
+        
+    </section>
+    <!-- footer -->
+    <div class="container policy">
+        <div class="main">
+            <p>At Netcoder Technology, we are committed to protecting the privacy and security of our users' personal
+                information. This Privacy Policy outlines how we collect, use, disclose, and protect the information
+                provided through our website, including students' details.</p>
+            <!--  -->
+            <ul>
+                <li>
+                    <h4>1. Information Collection:</h4>
+                </li>
+                <li><b>1.1. Personal Information:</b> We may collect personal information from users when they register
+                    on our website, subscribe to our newsletter, fill out a form, or interact with our services. This
+                    information may include but is not limited to names, email addresses, contact numbers, and
+                    demographic information.</li>
+                <li>
+                    <b>1.2. Usage Information:</b> We automatically collect certain information about users'
+                    interactions
+                    with our website, such as IP addresses, browser types, operating systems, and referring URLs.
+                    This information helps us analyze trends, administer the site, and track users' movements.
+                </li>
+            </ul>
 
-                <article>
-                    <header class="article-header">
-                        <h1><?php echo htmlspecialchars($blog['title']); ?></h1>
-                        
-                        <div class="article-meta">
-                            <span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                <?php echo htmlspecialchars($blog['author']); ?>
-                            </span>
-                            <span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                                <?php echo date('F d, Y', strtotime($blog['date_posted'])); ?>
-                            </span>
-                            <?php if(!empty($blog['tags'])): ?>
-                            <span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-                                <?php echo htmlspecialchars($blog['tags']); ?>
-                            </span>
-                            <?php endif; ?>
-                        </div>
-                    </header>
-
-                    <?php if (!empty($blog['main_image'])): ?>
-                        <img src="<?php echo htmlspecialchars($blog['main_image']); ?>" alt="<?php echo htmlspecialchars($blog['title']); ?>" class="main-featured-image">
-                    <?php endif; ?>
-
-                    <div class="article-body">
-                        <?php echo nl2br($blog['main_content']); ?>
-                    </div>
-
-                    <?php while($sec = $sections->fetch_assoc()): ?>
-                        <div class="content-block">
-                            <?php if (!empty($sec['section_title'])): ?>
-                                <h2><?php echo htmlspecialchars($sec['section_title']); ?></h2>
-                            <?php endif; ?>
-
-                            <?php if (!empty($sec['section_content'])): ?>
-                                <div class="article-body">
-                                    <?php echo nl2br($sec['section_content']); ?>
-                                </div>
-                            <?php endif; ?>
-
-                            <?php if (!empty($sec['section_image'])): ?>
-                                <img src="<?php echo htmlspecialchars($sec['section_image']); ?>" alt="Section visual" class="section-image">
-                            <?php endif; ?>
-                        </div>
-                    <?php endwhile; ?>
-
-                </article>
-            </div>
+            <!--  -->
+            <ul>
+                <li>
+                    <h4>2. Use of Information:</h4>
+                </li>
+                <li><b>2.1.</b> We use the information collected to provide and improve our services, personalize user
+                    experience, administer accounts, process transactions, and communicate with users about their
+                    accounts and our services.</li>
+                <li>
+                    <b>2.2.</b> We may also use the information to send periodic emails regarding news, updates,
+                    promotions, or other relevant information. Users may choose to opt out of receiving these
+                    communications at any time.
+                </li>
+            </ul>
+            <!--  -->
+            <ul>
+                <li>
+                    <h4>3. Information Sharing:</h4>
+                </li>
+                <li><b>3.1.</b> We do not sell, trade, or rent users' personal information to third parties without
+                    their consent. However, we may share aggregated demographic information not linked to any personal
+                    identification information regarding visitors and users with our business partners, trusted
+                    affiliates, and advertisers for the purposes mentioned above.</li>
+                <li>
+                    <b>3.2.</b> We may disclose personal information when required by law or in response to lawful
+                    requests by public authorities, such as to comply with a subpoena or similar legal process..
+                </li>
+            </ul>
+            <!--  -->
+            <ul>
+                <li>
+                    <h4>4. Data Security:</h4>
+                </li>
+                <li><b>4.1.</b> We implement appropriate data collection, storage, processing practices, and security
+                    measures to protect against unauthorized access, alteration, disclosure, or destruction of users'
+                    personal information and data stored on our site.</li>
+                <li>
+                    <b>4.2.</b> Despite our efforts to protect users' personal information, please note that no method
+                    of transmission over the internet or electronic storage is 100% secure. Therefore, while we strive
+                    to use commercially acceptable means to protect users' personal information, we cannot guarantee its
+                    absolute security.
+                </li>
+            </ul>
+            <!--  -->
+            <ul>
+                <li>
+                    <h4>5. Children's Privacy:</h4>
+                </li>
+                <li><b>5.1.</b> Our website and services are not directed to individuals under 13. We do not knowingly
+                    collect personal information from children under 13. If you are a parent or guardian and believe
+                    your child has provided us with personal information, please contact us, and we will remove that
+                    information from our systems..</li>
+            </ul>
+            <!--  -->
+            <ul>
+                <li>
+                    <h4>6. Changes to this Privacy Policy:</h4>
+                </li>
+                <li><b>6.1.</b> Netcoder Technology can update this privacy policy at any time. When we do, we will
+                    revise the updated date at the bottom of this page. We encourage users to frequently check this page
+                    for any changes to stay informed about how we are helping to protect the personal information we
+                    collect. You acknowledge and agree that it is your responsibility to review this privacy policy
+                    periodically and become aware of modifications.</li>
+            </ul>
+            <!--  -->
+            <ul>
+                <li>
+                    <h4>7. Acceptance of Terms: </h4>
+                </li>
+                <li><b>7.1.</b> By using this website, you signify your acceptance of this policy. If you do not agree to this policy, please do not use our website. Your continued use of the website following the posting of changes to this policy will be deemed your acceptance of those changes.</li>
+            </ul>
         </div>
     </div>
-
-     <!-- footer -->
+    <!-- footer -->
     <footer>
         <div class="container">
             <div class="newsletter">
                 <h2><span>Keep Up With Our Latest Updates</span></h2>
-                <p>Stay connected with our latest news and updates. Be the
-                    first to know about new courses,
+                <p>Stay connected with our latest news and updates. Be the first to know about new courses,
                     exclusive
-                    offers, and exciting announcements by subscribing to our
-                    newsletter.</p>
-                <form action>
+                    offers, and exciting announcements by subscribing to our newsletter.</p>
+                <form action="">
                     <input type="email" name="newsletter" id="newsletter" placeholder="Email Address">
                     <input type="submit" value="Subscribe">
                 </form>
@@ -436,8 +365,9 @@ if (isset($_GET['slug'])) {
                         <h5>Quick Links</h5>
                     </li>
                     <li><a href="index.php">Home</a></li>
+                    <li><a href="about.php">About</a></li>
                     <li><a href="gallery.php">Gallery</a></li>
-                    <li><a href="career.php">Carrer</a></li>
+                    <li><a href="contact.php">Contact</a></li>
                     <li><a href="privacy-policy.php">Privacy & Policy</a></li>
                 </ul>
                 <!--  -->
@@ -445,28 +375,22 @@ if (isset($_GET['slug'])) {
                     <li>
                         <h5>Top Courses</h5>
                     </li>
-                    <li><a href="fullstack-web-development.php">Full Stack
-                            Development</a></li>
-                    <li><a href="graphic-and-web-designing.php">Graphics &
-                            Web Designing</a></li>
+                    <li><a href="fullstack-web-development.php">Full Stack Development</a></li>
+                    <li><a href="graphic-and-web-designing.php">Graphics & Web Designing</a></li>
                     <li><a href="mern-stack.php">MERN Stack</a></li>
                     <li><a href="mean-stack.php">MEAN Stack</a></li>
-                    <li><a href="software-engineering.php">Python
-                            Course</a></li>
+                    <li><a href="software-engineering.php">Python Course</a></li>
                 </ul>
                 <!--  -->
                 <ul>
                     <li>
                         <h5>Features</h5>
                     </li>
-                    <li><a href="foundation-graphic.php">Graphic
-                            Designing</a></li>
+                    <li><a href="foundation-graphic.php">Graphic Designing</a></li>
                     <li><a href="animation.php">Animation</a></li>
                     <li><a href="ui&ux.php">UI & UX Design</a></li>
-                    <li><a href="digital-marketing.php">Digital
-                            Marketing</a></li>
-                    <li><a href="digital-content-creator.php">Content
-                            Creation</a></li>
+                    <li><a href="digital-marketing.php">Digital Marketing</a></li>
+                    <li><a href="digital-content-creator.php">Content Creation</a></li>
                 </ul>
                 <!--  -->
                 <!--  -->
@@ -474,16 +398,11 @@ if (isset($_GET['slug'])) {
                     <li>
                         <h5>Professional Training</h5>
                     </li>
-                    <li><a href="machine-learning.php">Data Science &
-                            Machine Learning</a></li>
-                    <li><a href="business-analytics.php">Data Science &
-                            Business Analytics</a></li>
-                    <li><a href="system-design.php">System Design &
-                            Operating System</a></li>
-                    <li><a href="cyber-security.php">Cyber
-                            Security</a></li>
-                    <li><a href="ethical-hacking.php">Ethical
-                            Hacking</a></li>
+                    <li><a href="machine-learning.php">Data Science & Machine Learning</a></li>
+                    <li><a href="business-analytics.php">Data Science & Business Analytics</a></li>
+                    <li><a href="system-design.php">System Design & Operating System</a></li>
+                    <li><a href="cyber-security.php">Cyber Security</a></li>
+                    <li><a href="ethical-hacking.php">Ethical Hacking</a></li>
                 </ul>
                 <!--  -->
             </div>
@@ -492,7 +411,7 @@ if (isset($_GET['slug'])) {
         </div>
         <div class="copyright">
             <div class="container">
-                <p>Copyright &copy;2026 All rights reserved by &hearts; <a href="index.php">Netcoder Technology</a></p>
+                <p>Copyright &copy;2025 All rights reserved by &hearts; <a href="index.php">Netcoder Technology</a></p>
                 <div class="social-icons">
                     <a href="https://www.facebook.com/netcodertechnology/">
                         <svg width="20" height="20" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
@@ -514,15 +433,20 @@ if (isset($_GET['slug'])) {
                         <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M1 8.14286C1 6.73619 1.06762 5.40952 1.15619 4.29714C1.28952 2.61714 2.62095 1.32571 4.3019 1.20857C5.91714 1.09524 8.12381 1 11 1C13.8762 1 16.0829 1.09524 17.6981 1.20857C19.379 1.32571 20.7105 2.6181 20.8438 4.29714C20.9324 5.41048 21 6.73524 21 8.14286C21 9.6 20.9276 10.9705 20.8343 12.1076C20.7772 12.8843 20.4401 13.6139 19.8854 14.1606C19.3308 14.7074 18.5965 15.0341 17.819 15.08C16.1876 15.1914 13.9048 15.2857 11 15.2857C8.09524 15.2857 5.81238 15.1914 4.18095 15.08C3.40351 15.0341 2.66919 14.7074 2.11457 14.1606C1.55994 13.6139 1.22276 12.8843 1.16571 12.1076C1.05716 10.7888 1.00188 9.46614 1 8.14286Z"
+                                 stroke-linejoin="round" />
+                            <path d="M9.0957 10.9994V5.28516L14.3338 8.1423L9.0957 10.9994Z" 
                                 stroke-linejoin="round" />
-                            <path d="M9.0957 10.9994V5.28516L14.3338 8.1423L9.0957 10.9994Z" stroke-linejoin="round" />
                         </svg>
                     </a>
                 </div>
             </div>
         </div>
     </footer>
-    
-    <script src="main.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script  defer src="DemoClass.js"></script>
+    <script  src="main.js"></script>
 </body>
+
 </html>

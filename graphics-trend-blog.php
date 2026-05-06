@@ -1,143 +1,22 @@
- <?php
-require_once 'config.php';
-
-// 1. Get the slug from the URL
-if (isset($_GET['slug'])) {
-    $slug = $conn->real_escape_string($_GET['slug']);
-
-    // 2. Fetch Main Blog Post
-    $sql = "SELECT * FROM blogs WHERE slug = '$slug'";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        $blog = $result->fetch_assoc();
-        $blog_id = $blog['id'];
-
-        // 3. Fetch Additional Content Sections
-        $section_sql = "SELECT * FROM blog_sections WHERE blog_id = $blog_id";
-        $sections = $conn->query($section_sql);
-    } else {
-        // Redirect to blog list if slug not found
-        header("Location: blog.php");
-        exit();
-    }
-} else {
-    header("Location: blog.php");
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($blog['title']); ?> | Netcoder Technology</title>
-    <meta name="description" content="<?php echo htmlspecialchars($blog['excerpt']); ?>">
-     <!-- font awesomme linked her -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="keywords"content="graphic design trends 2025, top graphic design trends, graphic design 2025, design trends Dharamshala, creative design trends, UI/UX trends 2025, graphic design tips, Himachal Pradesh design education, Netcoder Technology blog, future of graphic design">
+<meta name="description"content="Discover the top graphic design trends of 2025, from minimalist aesthetics to 3D design. Stay ahead in Dharamshala with insights from Netcoder Technology.">
+    <title>Top Graphic Design Trends to Watch in 2025 | Netcoder Technology</title>
+    <!-- favicon -->
     <link rel="shortcut icon" href="images/net-coder-logo icon.png">
-    <link rel="stylesheet" href="style.css"> <style>
-        /* --- Blog Detail Specific Styles --- */
-        .blog-detail-page {
-            background-color: #f9f9f9;
-            padding: 40px 0;
-            min-height: 80vh;
-        }
-
-        .blog-content-wrapper {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-
-        /* Back Button */
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            text-decoration: none;
-            color: #555;
-            font-weight: 600;
-            margin-bottom: 25px;
-            transition: 0.3s;
-            background: #f0f0f0;
-            padding: 8px 16px;
-            border-radius: 30px;
-        }
-        .back-btn:hover {
-            background: #ff6600;
-            color: #fff;
-            transform: translateX(-5px);
-        }
-        .back-btn svg { margin-right: 8px; }
-
-        /* Blog Header */
-        .article-header h1 {
-            font-size: 2.5rem;
-            color: #222;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-        .article-meta {
-            color: #777;
-            font-size: 0.95rem;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .article-meta span { display: inline-flex; align-items: center; }
-        .article-meta svg { width: 16px; height: 16px; margin-right: 5px; }
-
-        /* Images */
-        .main-featured-image {
-            width: 100%;
-            height: auto;
-            max-height: 500px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .section-image {
-            width: 100%;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-
-        /* Content Typography */
-        .article-body {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #333;
-        }
-        .article-body p { margin-bottom: 20px; }
-        
-        /* Dynamic Sections */
-        .content-block {
-            margin-top: 40px;
-            padding-top: 20px;
-        }
-        .content-block h2 {
-            color: #ff6600;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .blog-content-wrapper { padding: 20px; }
-            .article-header h1 { font-size: 1.8rem; }
-        }
-    </style>
+    <!-- css -->
+    <link rel="stylesheet" href="style.css">
+<!-- font awesomme linked her -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
-    <header class="main-header">
+  <header class="main-header">
         <nav class="main-nav">
 
             <!-- LOGO -->
@@ -195,7 +74,6 @@ if (isset($_GET['slug'])) {
                                 <a href="business-analytics.php">Data Science & Business Analytics</a>
                                 <a href="machine-learning.php">Data Science & Machine Learning</a>
                                 <a href="data-analytics.php">Data Analytics</a>
-
                                 <a href="cyber-security.php">Complete Cyber Security Course</a>
                                 <a href="ethical-hacking.php">Ethical Hacking</a>
                                 <a href="software-engineering.php">Software Engineering With Python</a>
@@ -253,6 +131,7 @@ if (isset($_GET['slug'])) {
 
         </nav>
     </header>
+
     <!-- side menu -->
     <div class="side-menu" id="mobileMenu">
 
@@ -301,7 +180,7 @@ if (isset($_GET['slug'])) {
                         <h4>Professional Courses</h4>
                         <a href="business-analytics.php">Data Science & Business Analytics</a>
                         <a href="machine-learning.php">Data Science & Machine Learning</a>
-                                <a href="data-analytics.php">Data Analytics</a>
+                        <a href="data-analytics.php">Data Analytics</a>
 
                         <a href="cyber-security.php">Complete Cyber Security Course</a>
                         <a href="ethical-hacking.php">Ethical Hacking</a>
@@ -330,7 +209,7 @@ if (isset($_GET['slug'])) {
                     Online Courses<span class="icon-arrow"></span></div>
                 <div class="side-dropdown">
 
-                      <a href="web&app-online.php">Full Stack & Apps</a>
+                    <a href="web&app-online.php">Full Stack & Apps</a>
                     <a href="digital-marketing-online.php">Digital Marketing</a>
                     <a href="data-science-online.php">Data Science</a>
                     <a href="data-analytics-online.php">Data Analytics</a>
@@ -348,73 +227,191 @@ if (isset($_GET['slug'])) {
         </div>
     </div>
 
-
-    <div class="blog-detail-page">
-        <div class="container">
-            <div class="blog-content-wrapper">
-                
-                <a href="blog.php" class="back-btn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="19" y1="12" x2="5" y2="12"></line>
-                        <polyline points="12 19 5 12 12 5"></polyline>
+    <main class="container">
+        <div class="blog-nav">
+            <ul>
+                <li>
+                    <a href="index.php"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9 21V13.6C9 13.0399 9 12.7599 9.109 12.546C9.20487 12.3578 9.35785 12.2049 9.54601 12.109C9.75993 12 10.04 12 10.6 12H13.4C13.9601 12 14.2401 12 14.454 12.109C14.6422 12.2049 14.7951 12.3578 14.891 12.546C15 12.7599 15 13.0399 15 13.6V21M2 9.5L11.04 2.72C11.3843 2.46181 11.5564 2.33271 11.7454 2.28294C11.9123 2.23902 12.0877 2.23902 12.2546 2.28295C12.4436 2.33271 12.6157 2.46181 12.96 2.72L22 9.5M4 8V17.8C4 18.9201 4 19.4802 4.21799 19.908C4.40974 20.2843 4.7157 20.5903 5.09202 20.782C5.51985 21 6.0799 21 7.2 21H16.8C17.9201 21 18.4802 21 18.908 20.782C19.2843 20.5903 19.5903 20.2843 19.782 19.908C20 19.4802 20 18.9201 20 17.8V8L13.92 3.44C13.2315 2.92361 12.8872 2.66542 12.5091 2.56589C12.1754 2.47804 11.8246 2.47804 11.4909 2.56589C11.1128 2.66542 10.7685 2.92361 10.08 3.44L4 8Z"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg></a>
+                </li>
+                <li>
+                    <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 17L11 12L6 7M13 17L18 12L13 7" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
                     </svg>
-                    Back to All Blogs
-                </a>
-
-                <article>
-                    <header class="article-header">
-                        <h1><?php echo htmlspecialchars($blog['title']); ?></h1>
-                        
-                        <div class="article-meta">
-                            <span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                <?php echo htmlspecialchars($blog['author']); ?>
-                            </span>
-                            <span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                                <?php echo date('F d, Y', strtotime($blog['date_posted'])); ?>
-                            </span>
-                            <?php if(!empty($blog['tags'])): ?>
-                            <span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-                                <?php echo htmlspecialchars($blog['tags']); ?>
-                            </span>
-                            <?php endif; ?>
-                        </div>
-                    </header>
-
-                    <?php if (!empty($blog['main_image'])): ?>
-                        <img src="<?php echo htmlspecialchars($blog['main_image']); ?>" alt="<?php echo htmlspecialchars($blog['title']); ?>" class="main-featured-image">
-                    <?php endif; ?>
-
-                    <div class="article-body">
-                        <?php echo nl2br($blog['main_content']); ?>
-                    </div>
-
-                    <?php while($sec = $sections->fetch_assoc()): ?>
-                        <div class="content-block">
-                            <?php if (!empty($sec['section_title'])): ?>
-                                <h2><?php echo htmlspecialchars($sec['section_title']); ?></h2>
-                            <?php endif; ?>
-
-                            <?php if (!empty($sec['section_content'])): ?>
-                                <div class="article-body">
-                                    <?php echo nl2br($sec['section_content']); ?>
-                                </div>
-                            <?php endif; ?>
-
-                            <?php if (!empty($sec['section_image'])): ?>
-                                <img src="<?php echo htmlspecialchars($sec['section_image']); ?>" alt="Section visual" class="section-image">
-                            <?php endif; ?>
-                        </div>
-                    <?php endwhile; ?>
-
-                </article>
-            </div>
+                </li>
+                <li>
+                    <a href="blog.php">BLOGS</a>
+                </li>
+                <li>
+                    <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 17L11 12L6 7M13 17L18 12L13 7" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </li>
+                <li><a href="#">Top Graphic Design Trends to Watch in 2025 | Netcoder Technology</a></li>
+            </ul>
         </div>
-    </div>
+        <div class="main-blog">
+            <div class="head">
+                <h2>Top Graphic Design Trends to Watch in 2025 | Netcoder Technology</h2>
+            </div>
+            <!--  -->
+            <!--  -->
+            <div class="blog-img">
+                <img src="images/trend-blog.jpg" alt="">
+            </div>
+            <div class="head">
+            <p>The world of graphic design is constantly evolving, with new trends emerging each year to meet the
+                demands of an ever-changing digital landscape. As we move into 2025, designers are embracing fresh
+                ideas and pushing the boundaries of creativity to stay ahead of the curve. Whether you’re a
+                professional designer or just starting out, these trends will help you keep your work relevant and
+                engaging.<br>
+                Here at Netcoder Technology, we believe in staying updated with the latest trends, and through our
+                Graphic Design Course, we equip our students with the tools and techniques to excel in the modern
+                design world. Let’s dive into the top graphic design trends for 2025 that are set to dominate the
+                industry. </p>
+            </div>
+            <!--  -->
+            <div class="blog-info">
+                <div>
+                    <h3>1. AI-Driven Design</h3>
+                    <img src="images/AI-Driven Design.jpg" alt="AI-Driven Design">
+                    <p>
+                        Artificial Intelligence (AI) has been steadily influencing various industries, and in 2025,
+                        AI-driven design will continue to gain momentum. AI tools can assist in automating certain
+                        aspects of design, helping designers experiment faster and work more efficiently. These tools
+                        allow for instant design suggestions, automated image editing, and even predictive trends based
+                        on data insights.<br>
+                        While AI enhances the design process, it doesn’t replace creativity. Designers can still infuse
+                        their unique vision and style into AI-generated suggestions, making it a powerful tool for
+                        creative exploration.
+                    </p>
+                </div>
+                <!--  -->
+                <div>
+                    <h3>2. Minimalism Paired with Bold Typography</h3>
+                    <img src="images/minimal-typography.jpg" alt="Minimal Web Design">
+                    <p>Minimalism has long been a dominant force in graphic design, and in 2025, it will continue to
+                        thrive. However, this year, minimalism is evolving with the inclusion of bold and expressive
+                        typography. This trend is about striking a balance between clean, simple layouts and
+                        attention-grabbing typefaces that convey personality and emotion.<br>
+                        Bold typography will be used to make statements in design, giving a minimalist composition a
+                        powerful visual punch. Whether for branding, web design, or advertising, this combination will
+                        create impactful and modern designs.
+                    </p>
+                </div>
+                <!--  -->
+                <div>
+                    <h3>3. Motion Graphics and Animation</h3>
+                    <img src="images/motion-graphic-animation.jpg" alt="Motion graphics and animation">
+                    <p>Static designs are evolving into more dynamic visuals through the rise of motion graphics and
+                        animations. In 2025, the use of animated elements will grow across platforms, especially in web
+                        design, social media, and marketing. Motion graphics can bring life to an otherwise static
+                        design, making it more engaging and interactive.<br>
+                        From subtle animations in logos to full-scale animated web designs, motion graphics will allow
+                        designers to create more immersive and engaging experiences for their audiences.
+                    </p>
+                </div>
+                <!--  -->
+                <div>
+                    <h3>4. 3D and Immersive Design</h3>
+                    <img src="images/3d-design.jpg" alt="3D and Immersive Design">
+                    <p>3D design is becoming increasingly popular across digital platforms, and in 2025, this trend will
+                        take center stage. Thanks to advances in technology, creating realistic 3D visuals is now more
+                        accessible than ever. 3D elements add depth, dimension, and an immersive experience that static
+                        2D graphics can't match.<br>
+                        Expect to see more 3D design elements in websites, apps, and product presentations. By blending
+                        the virtual and real worlds, 3D design enhances visual storytelling and captivates audiences
+                        like never before.
+                    </p>
+                </div>
+                <!--  -->
+                <div>
+                    <h3>5. Retro and Nostalgia-Inspired Design</h3>
+                    <img src="images/retro-design.jpg" alt="Retro and Nostalgia-Inspired Design">
+                    <p>Nostalgia continues to play a significant role in graphic design trends, and in 2025,
+                        retro-inspired aesthetics will remain popular. Designers are drawing inspiration from the '80s,
+                        '90s, and early 2000s, incorporating neon colors, pixelated graphics, and bold geometric shapes
+                        to evoke feelings of familiarity and warmth.<br>
+                        This trend taps into the growing desire for designs that remind people of simpler times, making
+                        it particularly effective for brands that want to connect emotionally with their audience.
 
-     <!-- footer -->
+                    </p>
+                </div>
+                <!--  -->
+                <div>
+                    <h3>6. Eco-Friendly and Sustainable Design</h3>
+                    <img src="images/Eco-Friendly-Design.jpg" alt="Eco-Friendly and Sustainable Design">
+                    <p>Sustainability is no longer just a trend; it's becoming a key principle in design. In 2025,
+                        eco-friendly designs will be a significant focus for brands and designers alike. This includes
+                        using earthy tones, recycled textures, and nature-inspired elements in digital and print
+                        materials. Additionally, many designers are choosing to adopt sustainable practices, such as
+                        opting for eco-friendly print materials and promoting digital-first strategies to reduce
+                        waste.<br>
+                        This movement toward sustainable design resonates with environmentally conscious consumers and
+                        reflects a broader societal shift toward responsible design.
+
+                    </p>
+                </div>
+                <!--  -->
+                <div>
+                    <h3>7. Custom Illustrations and Hand-Drawn Elements</h3>
+                    <img src="images/Custom-design.jpg" alt="Custom Illustrations and Hand-Drawn Elements">
+                    <p>Personalization is becoming increasingly important in graphic design, and custom illustrations
+                        offer a way to stand out. In 2025, hand-drawn elements and bespoke illustrations will take
+                        center stage, giving designs a unique, authentic feel. This trend allows designers to inject
+                        personality and individuality into their work, making it more relatable and engaging.<br>
+                        Brands that want to differentiate themselves are embracing this approach, as it adds a human
+                        touch to digital designs.
+                    </p>
+                </div>
+                <!--  -->
+                <div>
+                    <h3>8. Gradients and Vibrant Colors</h3>
+                    <img src="images/Gradients-Vibrant-colors.jpg" alt="Gradients and Vibrant Colors">
+                    <p>Gradients have made a strong comeback in recent years, and in 2025, they will continue to be a
+                        major trend. Designers are moving away from flat colors in favor of vibrant, dynamic gradients
+                        that add depth and energy to their work. Whether used as backgrounds, overlays, or within
+                        typography, gradients provide a visually striking way to enhance designs.<br>
+                        Bright and bold color combinations will also dominate, offering a refreshing contrast to the
+                        muted tones of minimalist design.
+
+                    </p>
+                </div>
+                <!--  -->
+                <div>
+                    <h3>9. Mixed Media Collages</h3>
+                    <img src="images/Mixed-Media.jpg" alt="Mixed Media Collages">
+                    <p>In 2025, designers will experiment with mixed media collages, blending photography,
+                        illustrations, textures, and typography into cohesive compositions. This trend offers a creative
+                        and playful way to tell stories and express ideas visually. Mixed media designs can evoke a
+                        sense of nostalgia while pushing the boundaries of traditional design, making them a versatile
+                        option for brands seeking to differentiate themselves.
+                    </p>
+                </div>
+                <!--  -->
+                <div>
+                    <h3>
+                        Embrace the Future of Design with Netcoder Technology
+                    </h3>
+                    <p>As graphic design continues to evolve in 2025, staying updated with the latest trends is
+                        essential for keeping your work relevant and cutting-edge. At <a href="index.php">Netcoder Technology</a>, we help our
+                        students not only learn these trends but also apply them in real-world projects. Our Graphic
+                        Design Course is designed to equip you with the skills needed to thrive in this exciting and
+                        dynamic industry.
+                        Whether you're passionate about creating 3D graphics, mastering AI tools, or exploring custom
+                        illustrations, our courses cover it all. Enroll in <a href="foundation-graphic.php">Netcoder Technology’s Graphic Design Course</a>
+                        today and start creating designs that lead the future!</p>
+                </div>
+            </div>
+    </main>
+
+    <!-- footer -->
     <footer>
         <div class="container">
             <div class="newsletter">
@@ -522,7 +519,7 @@ if (isset($_GET['slug'])) {
             </div>
         </div>
     </footer>
-    
-    <script src="main.js"></script>
+    <script src="/main.js"></script>
 </body>
+
 </html>
