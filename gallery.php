@@ -36,14 +36,21 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
     <style>
         :root {
             --primary: #ff6600;
-            --dark: #0a0a0a;
-            --card-bg: #161616;
-            --text-muted: #aaa;
+            --bg-light: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-dark: #1a1a1a;
+            --text-muted: #666;
+            --card-border: #eee;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
         }
 
         .gallery-section {
             padding: 80px 0;
-            background: var(--dark);
+            background: var(--bg-light);
         }
 
         .gallery-filter {
@@ -51,15 +58,15 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
             justify-content: center;
             flex-wrap: wrap;
             gap: 12px;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
 
         .filter-btn {
             padding: 12px 28px;
             border-radius: 50px;
-            border: 2px solid #333;
-            background: transparent;
-            color: #fff;
+            border: 2px solid #eee;
+            background: #fff;
+            color: var(--text-muted);
             cursor: pointer;
             font-weight: 600;
             transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -67,6 +74,7 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
             display: flex;
             align-items: center;
             gap: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
 
         .filter-btn i { font-size: 0.8rem; }
@@ -74,43 +82,45 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
         .filter-btn.active, .filter-btn:hover {
             background: var(--primary);
             border-color: var(--primary);
-            box-shadow: 0 8px 20px rgba(255, 102, 0, 0.3);
-            transform: translateY(-2px);
+            color: #fff;
+            box-shadow: 0 8px 25px rgba(255, 102, 0, 0.25);
+            transform: translateY(-3px);
         }
 
         .gallery-grid-dynamic {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
+            gap: 30px;
         }
 
         .gallery-item {
             position: relative;
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
-            background: var(--card-bg);
+            background: #fff;
             aspect-ratio: 1/1;
             cursor: pointer;
-            transition: 0.5s;
-            border: 1px solid #222;
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
         }
 
         .gallery-item:hover {
-            transform: scale(1.02);
+            transform: translateY(-10px);
             border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.08);
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .gallery-item:hover img {
-            transform: scale(1.1) rotate(1deg);
-            filter: brightness(0.7);
+            transform: scale(1.1);
+            filter: brightness(0.8);
         }
 
         .gallery-item .overlay {
@@ -119,8 +129,8 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 25px;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
             opacity: 0;
             transition: 0.4s;
         }
@@ -131,10 +141,11 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
 
         .gallery-item .overlay h4 {
             color: #fff;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 5px;
             transform: translateY(20px);
             transition: 0.4s 0.1s;
+            font-weight: 700;
         }
 
         .gallery-item:hover .overlay h4 {
@@ -145,11 +156,12 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
             display: inline-block;
             background: var(--primary);
             color: #fff;
-            padding: 4px 12px;
+            padding: 5px 14px;
             border-radius: 20px;
             font-size: 0.75rem;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
+            letter-spacing: 1px;
             width: fit-content;
         }
 
@@ -160,15 +172,16 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
             transform: translate(-50%, -50%) scale(0);
             background: #fff;
             color: var(--primary);
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 1.6rem;
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 2;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
         .gallery-item:hover .view-icon {
@@ -179,13 +192,13 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
         .lightbox {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.95);
+            background: rgba(0,0,0,0.92);
             z-index: 9999;
             display: none;
             align-items: center;
             justify-content: center;
             padding: 40px;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
         }
 
         .lightbox.active { display: flex; }
@@ -199,28 +212,28 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
         .lightbox-content img {
             max-width: 100%;
             max-height: 90vh;
-            border-radius: 10px;
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            border-radius: 15px;
+            box-shadow: 0 0 60px rgba(0,0,0,0.4);
         }
 
         .lightbox-close {
             position: absolute;
-            top: -40px;
-            right: -40px;
+            top: -50px;
+            right: 0;
             color: #fff;
-            font-size: 2.5rem;
+            font-size: 3rem;
             cursor: pointer;
             transition: 0.3s;
         }
 
-        .lightbox-close:hover { color: var(--primary); }
+        .lightbox-close:hover { color: var(--primary); transform: rotate(90deg); }
 
         .hidden { display: none; }
     </style>
 </head>
 
 <body>
-    <!-- Header code remains the same... -->
+    <!-- Header code... -->
 
     <!-- hero section -->
     <section class="page-hero">

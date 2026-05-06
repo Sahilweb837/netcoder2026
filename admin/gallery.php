@@ -80,46 +80,42 @@ $images = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery Management - Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: #0a0a0a; color: #fff; display: flex; }
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        body { background: #fcfcfc; color: #333; display: flex; min-height: 100vh; }
         
         /* Sidebar Styles */
-        .sidebar { width: 260px; background: #111; padding: 30px 20px; border-right: 1px solid #222; min-height: 100vh; position: sticky; top: 0; }
+        .sidebar { width: 280px; background: #fff; padding: 30px 20px; border-right: 1px solid #eee; position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; }
         .logo-container { margin-bottom: 40px; text-align: center; }
-        .logo-container img { max-width: 150px; }
-        .nav-links a { display: block; padding: 12px 15px; color: #888; text-decoration: none; border-radius: 8px; margin-bottom: 5px; transition: 0.3s; }
-        .nav-links a:hover, .nav-links a.active { background: #1a1a1a; color: #ff6600; }
-        .nav-links a i { margin-right: 10px; }
+        .logo-container img { max-width: 160px; }
+        .nav-links p { color: #aaa; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; margin: 25px 0 12px 15px; font-weight: 700; }
+        .nav-links a { display: flex; align-items: center; padding: 14px 18px; color: #555; text-decoration: none; border-radius: 12px; margin-bottom: 8px; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); gap: 12px; font-weight: 500; }
+        .nav-links a i { width: 20px; font-size: 1.2rem; transition: 0.3s; }
+        .nav-links a:hover { background: #fff5f0; color: #ff6600; transform: translateX(5px); }
+        .nav-links a.active { background: #ff6600; color: #fff; box-shadow: 0 10px 20px rgba(255, 102, 0, 0.2); }
         
-        /* Main Content */
-        .main-content { flex: 1; padding: 40px; }
-        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        h1 { font-size: 24px; font-weight: 600; }
+        .main-content { flex: 1; padding: 50px; max-width: 1300px; margin: 0 auto; width: 100%; }
         
-        .card { background: #111; border: 1px solid #222; border-radius: 12px; padding: 25px; margin-bottom: 30px; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr auto; gap: 20px; align-items: end; }
+        /* Header */
+        .header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 45px; }
+        .header-title h1 { font-size: 2.2rem; color: #1a1a1a; font-weight: 700; }
+        .header-title p { color: #888; }
+
+        /* Upload Section */
+        .upload-card { background: #fff; padding: 40px; border-radius: 24px; border: 1px solid #eee; box-shadow: 0 4px 12px rgba(0,0,0,0.02); margin-bottom: 50px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px; }
         
-        label { display: block; margin-bottom: 8px; font-size: 14px; color: #aaa; }
-        select, input[type="file"] { width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; color: #fff; border-radius: 8px; outline: none; }
-        .btn { padding: 12px 25px; border-radius: 8px; border: none; cursor: pointer; font-weight: 500; transition: 0.3s; text-decoration: none; display: inline-block; }
-        .btn-primary { background: #ff6600; color: #fff; }
-        .btn-primary:hover { background: #e65c00; }
-        .btn-danger { background: #dc2626; color: #fff; }
-        .btn-secondary { background: #333; color: #fff; }
+        label { display: block; margin-bottom: 12px; font-size: 0.95rem; color: #444; font-weight: 600; }
+        input, select { width: 100%; padding: 15px 20px; background: #f9f9f9; border: 2px solid #eee; color: #1a1a1a; border-radius: 12px; outline: none; transition: 0.3s; font-size: 1rem; }
+        input:focus, select:focus { border-color: #ff6600; background: #fff; box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.05); }
+        
+        .upload-btn { background: #ff6600; color: white; border: none; padding: 16px 35px; cursor: pointer; border-radius: 12px; font-weight: 700; transition: 0.3s; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; justify-content: center; box-shadow: 0 10px 25px rgba(255, 102, 0, 0.25); }
+        .upload-btn:hover { background: #e65c00; transform: translateY(-2px); box-shadow: 0 15px 35px rgba(255, 102, 0, 0.35); }
 
         /* Gallery Grid */
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
-        .gallery-item { position: relative; background: #1a1a1a; border-radius: 8px; overflow: hidden; border: 1px solid #222; }
-        .gallery-item img { width: 100%; height: 150px; object-fit: cover; }
-        .gallery-item .info { padding: 10px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; }
-        .gallery-item .category-tag { background: #333; padding: 2px 8px; border-radius: 4px; color: #ff6600; }
-        .gallery-item .delete-overlay { position: absolute; top: 5px; right: 5px; opacity: 0; transition: 0.3s; }
-        .gallery-item:hover .delete-overlay { opacity: 1; }
-        .checkbox-container { position: absolute; top: 5px; left: 5px; z-index: 2; }
-        
-        .alert { padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-        .alert-success { background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; color: #4ade80; }
         .alert-error { background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; color: #f87171; }
         
         .bulk-actions { margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }

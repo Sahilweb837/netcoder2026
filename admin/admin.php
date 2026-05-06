@@ -262,7 +262,12 @@ $blogs = $conn->query("SELECT * FROM blogs ORDER BY id DESC");
         .form-container { background: #fff; padding: 40px; border-radius: 24px; border: 1px solid #eee; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
         label { display: block; margin-bottom: 12px; font-size: 0.95rem; color: #444; font-weight: 600; }
         input, textarea, select { width: 100%; padding: 15px 20px; margin-bottom: 25px; background: #f9f9f9; border: 2px solid #eee; color: #1a1a1a; border-radius: 12px; outline: none; transition: 0.3s; font-size: 1rem; }
-        input:focus, textarea:focus, select:focus { border-color: #ff6600; background: #fff; box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.05); }
+        input:focus, textarea:focus, select:focus { 
+            border-color: #ff6600; 
+            background: #fff; 
+            box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.15); 
+            transform: translateY(-1px);
+        }
         
         .submit-btn { background: #ff6600; color: white; border: none; padding: 16px 35px; cursor: pointer; border-radius: 12px; font-weight: 700; transition: 0.3s; width: 100%; font-size: 1.1rem; box-shadow: 0 10px 25px rgba(255, 102, 0, 0.25); }
         .submit-btn:hover { background: #e65c00; transform: translateY(-2px); box-shadow: 0 15px 35px rgba(255, 102, 0, 0.35); }
