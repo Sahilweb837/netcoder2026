@@ -49,7 +49,7 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
         }
 
         .gallery-section {
-            padding: 80px 0;
+            padding: 50px 0;
             background: var(--bg-light);
         }
 
@@ -157,8 +157,7 @@ $images_res = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
             background: var(--primary);
             color: #fff;
             padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 0.75rem;
+             font-size: 0.75rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
